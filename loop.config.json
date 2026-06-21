@@ -1,0 +1,28 @@
+{
+  "$comment": "Autonomous build loop config (SETUP.5). The runner scripts/build-loop.mjs reads ONLY this file for project-specific values — no project name is hardcoded in the runner. Drop the runner + builder.md into another repo and edit this file alone to port the loop.",
+  "backlog": "specs/backlog.md",
+  "specsDir": "specs",
+  "plannerAgent": "joe",
+  "builderAgent": "builder",
+  "gateCommand": "pnpm verify src/scripts/verify-<id>.ts && pnpm exec tsc --noEmit",
+  "hookGate": "pnpm exec tsc --noEmit",
+  "maxRetries": 2,
+  "git": {
+    "commit": true,
+    "push": true,
+    "remote": "origin",
+    "baseBranch": "main",
+    "branchPrefix": "auto/",
+    "openPr": true,
+    "draftPr": false,
+    "autoMerge": false
+  },
+  "humanGate": {
+    "ids": ["LAUNCH.1", "LAUNCH.2", "LAUNCH.3", "HOME.8"],
+    "labels": ["[human-gate]"]
+  },
+  "notify": {
+    "enabled": false,
+    "command": ""
+  }
+}

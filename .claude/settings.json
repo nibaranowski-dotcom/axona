@@ -1,0 +1,47 @@
+{
+  "$comment": "Axona website — Claude Code settings. Commit this; keep secrets in settings.local.json (gitignored). Confirm model name + hook command availability in the 'verify latest' pass.",
+  "permissions": {
+    "defaultMode": "acceptEdits",
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(rm -rf:*)"
+    ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "case \"$CLAUDE_TOOL_INPUT\" in *'push'*'--force'*|*'push -f'*|*'push'*'origin main'*) echo 'Blocked: no force-push / no direct push to main. Open a PR.' >&2; exit 2 ;; esac"
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write|MultiEdit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "pnpm exec prettier --write \"$CLAUDE_FILE_PATHS\" 2>/dev/null; pnpm exec eslint --fix \"$CLAUDE_FILE_PATHS\" 2>/dev/null; true"
+          }
+        ]
+      }
+    ],
+    "$comment_SubagentStop": "SETUP.5 — when the 'builder' subagent finishes, run loop.config.json's id-less hookGate (a fast tsc --noEmit type-check) so a manual Claude Code session is gated like the runner, and fire notify.command if notify.enabled. Optional 'ping' / enforcer; the runner is the authoritative per-story gate. Best-effort and non-blocking (always exits 0).",
+    "SubagentStop": [
+      {
+        "matcher": "builder",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node -e \"const{readFileSync}=require('fs');const{execSync}=require('child_process');let c={};try{c=JSON.parse(readFileSync('loop.config.json','utf8'))}catch{process.exit(0)}const cmd=c.hookGate;if(!cmd){process.exit(0)}let ok=true;try{execSync(cmd,{stdio:'inherit'})}catch{ok=false}const msg=(ok?'GATE PASS':'GATE FAIL')+' — builder subagent';console.error('[builder gate] '+msg);if(c.notify&&c.notify.enabled&&c.notify.command){try{execSync(c.notify.command.replaceAll('<msg>',msg).replaceAll('<status>',ok?'pass':'fail'),{stdio:'inherit'})}catch{}}\" 2>&1; true"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "$comment": "Project-scoped MCP servers for the Axona website. Put real tokens in env / settings.local.json, never here. Re-confirm server packages in the 'verify latest' pass. Add the shadcn registry MCP once components.json exists.",
+  "mcpServers": {
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"],
+      "env": { "GITHUB_PERSONAL_ACCESS_TOKEN": "${GITHUB_PERSONAL_ACCESS_TOKEN}" }
+    },
+    "figma": {
+      "command": "npx",
+      "args": ["-y", "figma-developer-mcp", "--stdio"],
+      "env": { "FIGMA_API_KEY": "${FIGMA_API_KEY}" }
+    }
+  },
+  "$notesNextSteps": [
+    "shadcn registry MCP: add after `npx shadcn init` so Claude reads components.json + aliases.",
+    "Analytics MCP (GA4/Plausible): add when conversion tracking lands (backlog C3).",
+    "CMS MCP (Sanity/Contentful/Notion): add when copy moves out of MDX into a CMS."
+  ]
+}
