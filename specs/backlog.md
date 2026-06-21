@@ -16,7 +16,7 @@ Field order (Joe's trigger): **position · Epic · Track · StoryID · Title · 
 
 | # | Epic | StoryID | Title | Pri | Size | Status | Deps |
 |---|---|---|---|---|---|---|---|
-| 1 | E0 | SETUP.1 | Run "verify latest" pass; pin Next.js/shadcn/model/WCAG versions in CLAUDE.md | P0 | S | todo | — |
+| 1 | E0 | SETUP.1 | Run "verify latest" pass; pin Next.js/shadcn/model/WCAG versions in CLAUDE.md | P0 | S | done | — |
 | 2 | E0 | SETUP.2 | Scaffold Next.js (App Router) + Tailwind + shadcn (New York); Geist via next/font | P0 | M | done | SETUP.1 |
 | 3 | E0 | SETUP.3 | Encode design.md tokens as CSS variables + Tailwind theme; light/dark + toggle | P0 | M | todo | SETUP.2 |
 | 4 | E0 | SETUP.4 | App shell: Nav (sticky, hairline-on-scroll) + Footer (legal, a11y statement) | P0 | M | todo | SETUP.3 |
