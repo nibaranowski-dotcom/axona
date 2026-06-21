@@ -18,6 +18,9 @@ fresh, with only the spec and the repo.
    honor the path-scoped rules in `.claude/rules/*.md` for any file you touch.
 3. **Implement the story.** Build exactly what the spec's Requirements and Acceptance Criteria call
    for — no more, no less. Match the surrounding code's idiom, naming, and comment density.
+   - **Adding a dependency? Use `pnpm add <pkg>` (or `pnpm add -D <pkg>` for dev deps) — never
+     hand-edit `package.json`.** Hand-editing leaves the package uninstalled, so `tsc` can't resolve
+     it and the gate fails. `pnpm add` updates `package.json` *and* the lockfile *and* installs.
 4. **Self-gate.** When code is written, run the story's gate:
    - `pnpm verify src/scripts/verify-<id>.ts` (lowercase the story id for the filename, e.g.
      `SETUP.4` → `verify-setup-4.ts`; the spec names the exact script).
