@@ -89,3 +89,16 @@ this feel at home next to linear.app or harvey.ai? If not, it isn't done."*
   Geist via the `geist` package, `app/` at repo root, `verify` script via `tsx`. The SETUP.2 build
   initialized `radix-nova`; reconcile to `radix-vega` in SETUP.3 (theming) via
   `shadcn init --preset radix-vega --force --no-reinstall`.
+- **2026-06-21 (SETUP.3):** Made `design.md` executable — encoded every token as a CSS variable in
+  `app/globals.css` (`:root` light + `.dark` dark, each authored independently; light is not an
+  inversion), mapped through `@theme inline` to Tailwind v4 utilities. Electric teal is `--primary`
+  **and** `--ring` (the only accent); surfaces stay near-monochrome; `secondary/muted/accent/
+  destructive` are derived from the surface steps and flagged in-code as not-from-`design.md`. Added
+  `next-themes` (only new dep): `defaultTheme="dark"`, `enableSystem`, `disableTransitionOnChange`,
+  `suppressHydrationWarning` on `<html>` (no FOUC), plus an accessible `ThemeToggle`. `components.json`
+  reconciled to `"style": "radix-vega"`. **Drift flagged:** the `shadcn init --preset radix-vega`
+  network command could not run under the sandbox (install/network approval unavailable), so
+  `components.json` was edited directly to `radix-vega`; since SETUP.3 overwrites `globals.css` with
+  the `design.md` tokens, the preset's CSS defaults were irrelevant — only the style label and the
+  unified `radix-ui` import lineage (unchanged) matter. `next-themes` still needs a `pnpm install` to
+  land in `node_modules`.

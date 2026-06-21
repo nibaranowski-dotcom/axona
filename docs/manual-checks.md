@@ -36,3 +36,12 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] A [human-gate] story halts the loop without invoking the Builder.
 - [ ] Drop the files into a second repo, edit only loop.config.json, and --dry-run resolves a story there too (portability).
 - [ ] Branch protection on `main` is enabled (require PR + review; block direct pushes) — recommended backstop.
+
+## SETUP.3 — design tokens + theming
+- [ ] Dark is the default with no stored choice; switching OS appearance flips the site (prefers-color-scheme honored).
+- [ ] Toggle overrides OS, persists across reloads, and there is NO flash of the wrong theme on reload.
+- [ ] Toggle is reachable by keyboard, shows a visible teal focus ring, and has a sensible aria-label; respects reduced-motion.
+- [ ] Teal reads as a single signal (CTA/focus) — no screen "looks teal"; surfaces are near-monochrome.
+- [ ] Spot-check contrast (DevTools/axe): body text ≥ 4.5:1, teal UI element ≥ 3:1, in BOTH themes.
+- [ ] `pnpm dlx shadcn@latest add card` pulls `radix-ui` (unified) and matches the radix-vega look.
+- [ ] Run design-critique on the PR: does the themed proof page feel at home next to linear.app? Dark designed, not inverted?
