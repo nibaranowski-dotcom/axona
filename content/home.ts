@@ -163,3 +163,20 @@ export const wedge: Wedge = {
     },
   },
 };
+
+// ── The thesis / "our secret" (HOME.6) ────────────────────────────────────────
+// Copy is verbatim from specs/content/content.md §7 "The thesis (our secret)". Content integrity
+// (../CLAUDE.md): the argument reconciles to ../memory/ (idea: AI-native OS for robotics; the
+// humans+machines+agents thesis and the proprietary-data → compounding-models/memory moat) — it is
+// stated as a thesis, not evidenced; no invented metric, customer, or "we have" claim; zero banned
+// words. Consumed by a Server Component (components/thesis.tsx); pure data, CMS-ready.
+
+export interface Thesis {
+  heading: string;
+  body: string;
+}
+
+export const thesis: Thesis = {
+  heading: "A robotics company's workforce is humans, machines, and agents.",
+  body: "Horizontal ERPs — even the AI-native ones — model a human-only company. They can't natively orchestrate machines and agents as first-class, and they aren't tuned to robotics. The company that builds the operating system for all three, on proprietary robotics data, wins the category. That data becomes specialized models and memory that compound with every build — a moat no horizontal incumbent can copy.",
+};
