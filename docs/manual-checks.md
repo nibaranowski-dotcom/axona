@@ -83,3 +83,11 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] Mobile (~360px): heading wraps cleanly, body keeps a readable measure, no horizontal scroll, no layout shift.
 - [ ] Reading the page top-down — category (hero) → pain (problem) → proof (wedge) — the narrative holds.
 - [ ] design-critique on the PR: does an ops leader read this and think "that's my week"? Restraint, not decoration?
+
+## HOME.6 — thesis
+- [ ] Heading + body read verbatim from content.md §7; no banned words; no invented metric/claim.
+- [ ] Reads as a deliberate editorial statement — strong type hierarchy, generous measure/rhythm — not a flat paragraph or a boxed callout.
+- [ ] Disable JS → the full thesis renders.
+- [ ] At most one subtle teal accent; section reads near-monochrome in both themes; body contrast passes AA.
+- [ ] Mobile (~360px): heading scales down a step, measure holds, no overflow, no layout shift.
+- [ ] design-critique on the PR: does this land the category argument with the weight it deserves, at the linear/harvey bar?
