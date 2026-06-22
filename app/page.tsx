@@ -5,6 +5,7 @@ import { HowItWorks } from "@/components/how-it-works";
 import { Pillars } from "@/components/pillars";
 import { WhyNow } from "@/components/why-now";
 import { Thesis } from "@/components/thesis";
+import { WhoItsFor } from "@/components/who-its-for";
 
 // Homepage. The app shell (header, footer, theme toggle, skip link) wraps this from
 // app/layout.tsx (SETUP.4); this file owns the page body and the single <h1> (in <Hero />).
@@ -15,7 +16,9 @@ import { Thesis } from "@/components/thesis";
 // problem → wedge → how-it-works → pillars → why-now → thesis. The pillars (the Primitives ×
 // Domains × Verticals model) render after the four implementation layers; why-now (the timing
 // thesis) sits between the pillars and the thesis (content.md orders §6 between §5 and §7); the
-// thesis stays last among currently-rendered sections.
+// thesis stays last among the argument sections; who-it's-for (HOME.7) follows it (the audience
+// map — verticals sequence + buyer/champion), per content.md's §7 → §8 order. HOME.8 (company) and
+// HOME.9 (final CTA) insert after <WhoItsFor /> later.
 export default function Home() {
   return (
     <>
@@ -26,6 +29,7 @@ export default function Home() {
       <Pillars />
       <WhyNow />
       <Thesis />
+      <WhoItsFor />
     </>
   );
 }
