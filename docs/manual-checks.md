@@ -91,3 +91,16 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] At most one subtle teal accent; section reads near-monochrome in both themes; body contrast passes AA.
 - [ ] Mobile (~360px): heading scales down a step, measure holds, no overflow, no layout shift.
 - [ ] design-critique on the PR: does this land the category argument with the weight it deserves, at the linear/harvey bar?
+
+## HOME.4 — how it works (4-layer architecture)
+- [ ] Heading + all four layers (Foundation, Intelligence spine, Domain apps, Vertical editions) read verbatim from content.md §4; no banned words, no fifth layer, no invented example.
+- [ ] The diagram reads as a real stacked architecture (Foundation at the base → Vertical editions on top), not a gradient/shadow flowchart or a default-font diagram.
+- [ ] Disable JS in DevTools → reload: the full heading, all four layers, and the static motif render.
+- [ ] Click the nav "How it works" link → it scrolls to this section (#how-it-works is no longer a dead link).
+- [ ] Section sits between the wedge and the thesis; page has exactly one <h1> (the hero), heading here is <h2>.
+- [ ] Screen-reader / tab-walk: the four layers are announced in stack order as a list with each layer named; the signal motif is silent (decorative).
+- [ ] Token-driven: inspect element — colors/borders/radius/motif come from CSS variables/tokens; no inline hex, no raw Tailwind color utilities.
+- [ ] Both themes: dark (near-black) and light are designed; the teal signal reads correctly on both; descriptions pass AA; section reads near-monochrome (one accent on the spine/signal).
+- [ ] prefers-reduced-motion on: any signal-line pulse renders static.
+- [ ] Mobile (~360px): bands wrap full-width, descriptions keep a readable measure, no horizontal scroll, no layout shift.
+- [ ] design-critique on the PR: does Julia read this and see a platform with a defensible intelligence spine, at the linear/harvey bar?
