@@ -35,16 +35,19 @@ founding team" / careers contact (talent). One sitewide CTA style; teal, used as
    trail (propose → approve → audit). Clearly-marked sample data.
 5. **How it works** — the 4-layer architecture: Foundation (data/connectors/ontology) → Intelligence
    spine (specialized models + memory + agents) → Domain apps → Vertical editions. Calm diagram.
-6. **Why now** — robotics inflection + cheap specialized models + forward-deployed GTM. Three tight points.
-7. **The thesis / our secret** — a robotics company's workforce is humans + machines + agents; the
+6. **The three pillars** — Primitives × Domains × Verticals (the core model, "as framed to Julia").
+   Build primitives once → compose into domain workflows → package per vertical. Calm three-column
+   layout; the 4-layer architecture (§5) is the technical implementation, this is how it scales.
+7. **Why now** — robotics inflection + cheap specialized models + forward-deployed GTM. Three tight points.
+8. **The thesis / our secret** — a robotics company's workforce is humans + machines + agents; the
    OS that models all three, tuned on proprietary robotics data, wins the category. The moat: data →
    models + memory that compound per build. (This is the section that resonates with a model-research CTO.)
-8. **Who it's for** — verticals strip: Humanoids (now) → Defense (next) → Logistics, Industrial,
+9. **Who it's for** — verticals strip: Humanoids (now) → Defense (next) → Logistics, Industrial,
    Space. Buyer/champion framing.
-9. **Company / join us** — short vision + "founding team forming, building the category — we're
+10. **Company / join us** — short vision + "founding team forming, building the category — we're
    hiring founders." This is the Julia pull. Team bios gated/mocked until confirmed (see content rule).
-10. **Final CTA** — `Request access` + `Build it with us` (talent). Honest expectation-setting.
-11. **Footer** — nav, legal, accessibility statement, contact, consent controls.
+11. **Final CTA** — `Request access` + `Build it with us` (talent). Honest expectation-setting.
+12. **Footer** — nav, legal, accessibility statement, contact, consent controls.
 
 ## Request-access form (conversion)
 Fields: name, work email, company, role, what they're building (short). Server action → Resend
