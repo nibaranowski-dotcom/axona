@@ -35,7 +35,7 @@ async function run() {
 
   // GUARDRAILS: tokens only (no inline hex / raw color utilities in components)
   const files: string[] = [];
-  const walk = (d: string) => fs.readdirSync(d, { withFileTypes: true }).forEach((e: any) => {
+  const walk = (d: string) => fs.readdirSync(d, { withFileTypes: true }).forEach((e) => {
     const fp = `${d}/${e.name}`;
     if (e.isDirectory()) walk(fp); else if (/\.(tsx|ts|css)$/.test(e.name)) files.push(fp);
   });

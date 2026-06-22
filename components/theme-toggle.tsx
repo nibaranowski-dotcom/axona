@@ -15,6 +15,9 @@ export function ThemeToggle() {
   const { resolvedTheme, setTheme } = useTheme();
   const [mounted, setMounted] = React.useState(false);
 
+  // Mount-only guard: resolvedTheme is undefined on the server, so the aria-label upgrades after
+  // hydration. setState in a mount effect is the documented next-themes pattern, not a render loop.
+  // eslint-disable-next-line react-hooks/set-state-in-effect
   React.useEffect(() => setMounted(true), []);
 
   const isDark = resolvedTheme === "dark";
