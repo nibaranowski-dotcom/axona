@@ -180,6 +180,17 @@ function runClaude(prompt, { json = false } = {}) {
 }
 
 // ---------- gate ----------
+// Materialize any dependency the Builder added to package.json (even if it forgot to install one),
+// so the gate's `tsc` can resolve new modules. Best-effort and non-fatal — the gate is the
+// authority; a broken install simply surfaces as a gate FAIL.
+function installDeps() {
+  try {
+    execSync('pnpm install', { encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
+  } catch (e) {
+    console.log(`  (pnpm install warning: ${(e.stderr || e.message || '').toString().trim().split('\n').pop()})`);
+  }
+}
+
 function runGate(id) {
   const cmd = cfg.gateCommand.replaceAll('<id>', slug(id));
   try {
@@ -536,6 +547,9 @@ async function main() {
         tries++;
         continue;
       }
+      // Self-heal deps: install before gating so a Builder-added package resolves under tsc.
+      console.log('[deps] pnpm install …');
+      installDeps();
       const gate = runGate(row.id);
       pass = gate.ok;
       if (!pass) {
