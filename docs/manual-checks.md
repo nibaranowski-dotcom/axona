@@ -55,3 +55,12 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] `/accessibility` renders its own `<h1>`, names WCAG 2.2 AA, lists measures + known limitations, and shows the "contact coming soon" placeholder (no fabricated email). View source: `<title>`, meta description, canonical, and OG tags are present.
 - [ ] Both themes: teal still reads as a single signal (the one CTA + focus rings); header/footer borders are hairlines, not shadows. Contrast spot-check passes (axe) in light and dark.
 - [ ] Sign-off still pending (rendered as placeholders, not invented): legal entity + registered address, Privacy/Terms URLs, public accessibility email, social links.
+
+## HOME.1 — hero
+- [ ] Lighthouse (mobile, throttled): LCP element is the H1, LCP ≤ 2.0s, CLS ≤ 0.05, INP ≤ 200ms.
+- [ ] Disable JS in DevTools → reload: headline, subhead, CTAs, and a static motif all render; CTAs are clickable.
+- [ ] Toggle prefers-reduced-motion → the axon pulse stops animating (renders at rest); everything else intact.
+- [ ] Tab order: skip-link → header → hero CTAs, each with a visible teal focus ring; "Request access" and "See how it works" scroll to their anchors (no 404).
+- [ ] Both themes: dark (near-black) and light are designed; teal appears only as the motif pulse + primary CTA.
+- [ ] Mobile width (~360px): no horizontal scroll, no layout shift; headline remains the dominant element.
+- [ ] design-critique on the PR: does the hero feel at home next to linear.app / harvey.ai? Is the motif restraint, not decoration?
