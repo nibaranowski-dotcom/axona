@@ -25,7 +25,7 @@ Field order (Joe's trigger): **position · Epic · Track · StoryID · Title · 
 | 6 | E1 | HOME.2 | The problem section | P1 | S | done | SETUP.4 |
 | 7 | E1 | HOME.3 | Product/wedge: 3 cards + Harvey-style propose→approve→audit mock (sample data) | P0 | L | done | SETUP.4 |
 | 8 | E1 | HOME.4 | How it works: 4-layer architecture diagram (calm, token-driven) | P1 | M | done | SETUP.4 |
-| 8b | E1 | HOME.4B | Three pillars (Primitives × Domains × Verticals): calm three-column section | P1 | S | todo | SETUP.4 |
+| 8b | E1 | HOME.4B | Three pillars (Primitives × Domains × Verticals): calm three-column section | P1 | S | done | SETUP.4 |
 | 9 | E1 | HOME.5 | Why now (3 points) | P2 | S | todo | SETUP.4 |
 | 10 | E1 | HOME.6 | The thesis / "our secret" section | P1 | S | done | SETUP.4 |
 | 11 | E1 | HOME.7 | Who it's for: verticals strip + buyer/champion framing | P2 | S | todo | SETUP.4 |
