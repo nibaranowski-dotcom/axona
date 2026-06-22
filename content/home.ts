@@ -409,3 +409,28 @@ export const whoItsFor: WhoItsFor = {
   },
   champion: { role: "Champion", text: "procurement / ops lead." },
 };
+
+// ── Final CTA (HOME.9) ─────────────────────────────────────────────────────────
+// Copy is verbatim from specs/content/content.md §10 "Final CTA" (canonical content of record).
+// Content integrity (../CLAUDE.md): the close sets honest expectations — "a small number of design
+// partners at a time", no signed-customer or traction claim, no invented metric; zero banned words.
+// Consumed by a Server Component (components/final-cta.tsx); pure data, CMS-ready.
+//
+// Anchor contract (forward, never a 404): the primary CTA self-anchors to `#request-access` — the
+// band this object renders, which IS the destination of the hero (HOME.1) and nav (SETUP.4) "Request
+// access" links. CONV.1 later wires this button to the real request-access form. The secondary CTA
+// points at `#company` (HOME.8's section); until HOME.8 ships it resolves as an in-page anchor (no-op).
+
+export interface FinalCta {
+  heading: string;
+  sub: string;
+  primaryCta: Cta;
+  secondaryCta: Cta;
+}
+
+export const finalCta: FinalCta = {
+  heading: "Get early access to Axona.",
+  sub: "Tell us what you're building. We work with a small number of design partners at a time.",
+  primaryCta: { label: "Request access", href: "#request-access" }, // self-anchor; CONV.1 wires the form
+  secondaryCta: { label: "Build it with us", href: "#company" }, // HOME.8 (talent path)
+};

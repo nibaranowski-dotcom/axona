@@ -141,3 +141,11 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] prefers-reduced-motion on: any Now-marker highlight renders static.
 - [ ] Mobile (~360px): stages stack to one column (Now → Next → Then), the buyer/champion line wraps, no horizontal scroll, no layout shift.
 - [ ] design-critique on the PR: does a VP of Ops at a humanoid maker self-identify in one scan, and does an a16z partner read a deliberate beachhead sequence — at the linear/harvey bar?
+
+## HOME.9 — final CTA band
+- [ ] Heading + sub + button labels read verbatim from content.md §10; no banned words.
+- [ ] Heading is an <h2>; the rendered page still has exactly one <h1> (the hero).
+- [ ] The band is the last thing in <main>, after "Who it's for".
+- [ ] hero/nav "Request access" scrolls to this band (#request-access); "Build it with us" → #company; neither 404s.
+- [ ] Disable JS → band renders, buttons clickable.
+- [ ] Both themes: calm, near-monochrome; teal only on the primary button; no CLS at mobile width.
