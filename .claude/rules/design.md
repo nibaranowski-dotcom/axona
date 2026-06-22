@@ -18,3 +18,4 @@
 - Compose from shadcn/Shadcnblocks; don't reinvent primitives. Every interactive element has a
   visible focus state and real hover/active/disabled states.
 - Run `design-critique` before calling any screen done.
+- The frontend-design skill is advisory; where it conflicts with design.md or this rule (gradients, a second/display typeface, "take an aesthetic risk"), these win — one Geist family, one teal accent, restraint.
