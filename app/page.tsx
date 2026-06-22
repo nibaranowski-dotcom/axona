@@ -1,23 +1,20 @@
 import { Button } from "@/components/ui/button";
-import { ThemeToggle } from "@/components/theme-toggle";
 
 // SETUP.3 token proof — NOT the homepage. A deliberately plain board that exercises the
-// design.md token system (surface steps, text tiers, the single teal signal, the toggle) so
-// design-critique and the a11y pass have something real to judge. HOME.1 replaces this entirely.
+// design.md token system (surface steps, text tiers, the single teal signal) so design-critique
+// and the a11y pass have something real to judge. The app shell (nav + footer, with the theme
+// toggle) now wraps this from app/layout.tsx (SETUP.4). HOME.1 replaces this body entirely.
 export default function Home() {
   return (
-    <main className="mx-auto flex min-h-dvh max-w-3xl flex-col gap-10 px-6 py-16">
-      <header className="flex items-start justify-between gap-4">
-        <div className="flex flex-col gap-1">
-          <p className="font-mono text-xs tracking-tight text-muted-foreground">
-            SETUP.3 · design tokens + theming
-          </p>
-          <h1 className="text-2xl font-[590] tracking-[-0.02em] text-foreground">
-            Token &amp; theme proof
-          </h1>
-        </div>
-        <ThemeToggle />
-      </header>
+    <div className="mx-auto flex max-w-3xl flex-col gap-10 px-6 py-16">
+      <div className="flex flex-col gap-1">
+        <p className="font-mono text-xs tracking-tight text-muted-foreground">
+          SETUP.3 · design tokens + theming
+        </p>
+        <h1 className="text-2xl font-[590] tracking-[-0.02em] text-foreground">
+          Token &amp; theme proof
+        </h1>
+      </div>
 
       {/* Surface steps — elevation via surface + 1px hairline border, not shadow. */}
       <section className="flex flex-col gap-3">
@@ -65,6 +62,6 @@ export default function Home() {
           </span>
         </div>
       </section>
-    </main>
+    </div>
   );
 }

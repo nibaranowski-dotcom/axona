@@ -45,3 +45,13 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] Spot-check contrast (DevTools/axe): body text ≥ 4.5:1, teal UI element ≥ 3:1, in BOTH themes.
 - [ ] `pnpm dlx shadcn@latest add card` pulls `radix-ui` (unified) and matches the radix-vega look.
 - [ ] Run design-critique on the PR: does the themed proof page feel at home next to linear.app? Dark designed, not inverted?
+
+## SETUP.4 — app shell (nav + footer + a11y statement)
+- [ ] `pnpm dev` serves `/` inside the shell: sticky header (wordmark, Product/How it works/Company, theme toggle, "Request access"), page body, footer — no console errors.
+- [ ] Scroll down: a 1px hairline fades in under the header; scroll back to top: it fades out. The header never jumps/changes height (no CLS). Confirm in DevTools Performance there's no per-frame scroll handler.
+- [ ] Tab from page load: the FIRST focus is "Skip to content"; activating it moves focus into `<main>` and the next Tab lands inside the content (not back in the nav).
+- [ ] Every visible nav/footer link goes somewhere real (homepage anchors or `/accessibility`). Legal links (Privacy/Terms) render as muted, non-clickable "coming soon" — no dead `#`.
+- [ ] Resize to mobile (< 768px): the inline nav collapses to a menu button; opening traps focus, Escape closes, and a link tap closes the sheet. Keyboard-operable throughout.
+- [ ] `/accessibility` renders its own `<h1>`, names WCAG 2.2 AA, lists measures + known limitations, and shows the "contact coming soon" placeholder (no fabricated email). View source: `<title>`, meta description, canonical, and OG tags are present.
+- [ ] Both themes: teal still reads as a single signal (the one CTA + focus rings); header/footer borders are hairlines, not shadows. Contrast spot-check passes (axe) in light and dark.
+- [ ] Sign-off still pending (rendered as placeholders, not invented): legal entity + registered address, Privacy/Terms URLs, public accessibility email, social links.

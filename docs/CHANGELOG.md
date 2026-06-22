@@ -26,3 +26,18 @@ Moved out of `CLAUDE.md` to keep the brief lean. Newest at the bottom; one entry
   the `design.md` tokens, the preset's CSS defaults were irrelevant — only the style label and the
   unified `radix-ui` import lineage (unchanged) matter. `next-themes` still needs a `pnpm install` to
   land in `node_modules`.
+- **2026-06-22 (SETUP.4):** Built the global app shell, composed once in `app/layout.tsx`: a
+  sticky `SiteHeader` with a **CLS-safe hairline-on-scroll** (border animates transparent →
+  `--border` — height never changes), a skip-to-content link → `<main id="main" tabIndex={-1}>`,
+  and a `SiteFooter` with legal + accessibility links. Header/footer are **Server Components**;
+  only the leaves that need it are client — `header-scroll` (an IntersectionObserver sentinel that
+  toggles `data-scrolled` on the header via a direct DOM write, **no React state**, to protect
+  INP), `nav-links` (`aria-current` via `usePathname`), and `mobile-nav` (Radix Dialog sheet).
+  All shell copy/destinations live in `content/site.ts` (CMS-ready); every link maps to a real
+  backlog story (HOME.3/4/8, CONV.1) or this PRD — no dead `#`. Added a real `/accessibility`
+  statement page (own `<h1>`, WCAG 2.2 AA conformance, measures, known limitations, contact) with
+  full per-page metadata + canonical. **Sign-off pending (rendered as marked placeholders, never
+  fabricated):** legal entity + registered address, Privacy/Terms URLs, public accessibility
+  email, social links. The SETUP.3 token-proof `page.tsx` was reparented under the shell (its own
+  `<main>`/toggle removed; the layout now owns the single `<main>` and the toggle lives in the
+  nav). Gate: `src/scripts/verify-setup-4.ts`.
