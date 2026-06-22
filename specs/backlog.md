@@ -30,7 +30,7 @@ Field order (Joe's trigger): **position · Epic · Track · StoryID · Title · 
 | 10 | E1 | HOME.6 | The thesis / "our secret" section | P1 | S | done | SETUP.4 |
 | 11 | E1 | HOME.7 | Who it's for: verticals strip + buyer/champion framing | P2 | S | done | SETUP.4 |
 | 12 | E1 | HOME.8 | Company / join-us section (Julia surface); bios gated until confirmed [human-gate] | P1 | M | todo | SETUP.4 |
-| 13 | E1 | HOME.9 | Final CTA band | P1 | S | todo | HOME.1 |
+| 13 | E1 | HOME.9 | Final CTA band | P1 | S | done | HOME.1 |
 | 14 | E2 | SEO.1 | Per-page metadata + OG image gen + canonical; Organization JSON-LD | P0 | M | todo | SETUP.2 |
 | 15 | E2 | SEO.2 | sitemap.ts + robots.ts; MDX content model (CMS-ready) | P1 | M | todo | SEO.1 |
 | 16 | E3 | CONV.1 | Request-access form → server action → Resend; honeypot, consent, success/error states | P0 | L | todo | SETUP.4 |
