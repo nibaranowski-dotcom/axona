@@ -116,3 +116,15 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] prefers-reduced-motion on: any wedge-marker highlight renders static.
 - [ ] Mobile (~360px): columns stack to one (Primitives → Domains → Verticals), lists keep a readable measure, no horizontal scroll, no layout shift.
 - [ ] design-critique on the PR: does Julia read this and see "built once, composed everywhere" — combinatorial leverage across an industry — at the linear/harvey bar?
+
+## HOME.5 — why now (3 points)
+- [ ] Heading + all three points (robotics inflecting · buildable substrate today · forward-deployed) read verbatim from content.md §6; no banned words, no added/removed/reordered point, no invented metric, date, or market-size number.
+- [ ] The section reads as a calm three-point timing thesis, not gradient cards, drop shadows, big fake stats, emoji bullets, or a centered template.
+- [ ] Disable JS in DevTools → reload: the full heading and all three points render.
+- [ ] Section sits between the pillars and the thesis; page has exactly one <h1> (the hero), heading here is <h2>.
+- [ ] Screen-reader / tab-walk: the three points are announced in order as an ordered list; any "1/2/3" marker is decorative (order comes from the list, not color alone).
+- [ ] Token-driven: inspect element — colors/borders/radius/any accent come from CSS variables/tokens; no inline hex, no raw Tailwind color utilities.
+- [ ] Both themes: dark (near-black) and light are designed; any teal accent reads correctly on both; points pass AA; section reads near-monochrome (one accent at most).
+- [ ] prefers-reduced-motion on: any stagger/fade renders static.
+- [ ] Mobile (~360px): points stack to one column, each keeps a readable measure, no horizontal scroll, no layout shift.
+- [ ] design-critique on the PR: does an a16z partner read this and see a deliberate "why now," at the linear/harvey bar?
