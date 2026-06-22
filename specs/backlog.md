@@ -21,7 +21,7 @@ Field order (Joe's trigger): **position · Epic · Track · StoryID · Title · 
 | 3 | E0 | SETUP.3 | Encode design.md tokens as CSS variables + Tailwind theme; light/dark + toggle | P0 | M | done | SETUP.2 |
 | 4 | E0 | SETUP.4 | App shell: Nav (sticky, hairline-on-scroll) + Footer (legal, a11y statement) | P0 | M | done | SETUP.3 |
 | 4b | E0 | SETUP.5 | Autonomous build loop: Builder subagent + headless runner + gate hooks (planner⇄builder handoff) | P1 | L | done | SETUP.2 |
-| 5 | E1 | HOME.1 | Hero: H1 + subhead + dual CTA + "axon signal" motif; LCP-safe, no blocking JS | P0 | M | todo | SETUP.4 |
+| 5 | E1 | HOME.1 | Hero: H1 + subhead + dual CTA + "axon signal" motif; LCP-safe, no blocking JS | P0 | M | done | SETUP.4 |
 | 6 | E1 | HOME.2 | The problem section | P1 | S | todo | SETUP.4 |
 | 7 | E1 | HOME.3 | Product/wedge: 3 cards + Harvey-style propose→approve→audit mock (sample data) | P0 | L | todo | SETUP.4 |
 | 8 | E1 | HOME.4 | How it works: 4-layer architecture diagram (calm, token-driven) | P1 | M | todo | SETUP.4 |

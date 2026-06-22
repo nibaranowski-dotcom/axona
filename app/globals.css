@@ -101,7 +101,25 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-/* Reduced-motion: kill animation/transition; interactivity (e.g. the theme toggle) still works. */
+/* Axon-signal motif (components/axon-signal.tsx): one teal pulse travels the trunk path by
+   animating the lit dash's offset. pathLength is normalized to 100, so the lit segment moves a
+   full traversal each loop. Slow (~5.5s) and eased per design.md — signal, not screensaver.
+   transform/opacity-free, GPU-cheap, zero JS. Gated by reduced-motion below: when killed, the
+   stroke-dashoffset falls to its declared value in the SVG, leaving the pulse at rest mid-path. */
+@keyframes axon-pulse {
+  from {
+    stroke-dashoffset: 100;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.axon-pulse {
+  animation: axon-pulse 5500ms var(--ease-out) infinite;
+}
+
+/* Reduced-motion: kill animation/transition; interactivity (e.g. the theme toggle) still works.
+   The axon pulse stops here and rests at its declared stroke-dashoffset (signal at rest). */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
