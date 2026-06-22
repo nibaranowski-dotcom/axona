@@ -23,7 +23,7 @@ Field order (Joe's trigger): **position · Epic · Track · StoryID · Title · 
 | 4b | E0 | SETUP.5 | Autonomous build loop: Builder subagent + headless runner + gate hooks (planner⇄builder handoff) | P1 | L | done | SETUP.2 |
 | 5 | E1 | HOME.1 | Hero: H1 + subhead + dual CTA + "axon signal" motif; LCP-safe, no blocking JS | P0 | M | done | SETUP.4 |
 | 6 | E1 | HOME.2 | The problem section | P1 | S | todo | SETUP.4 |
-| 7 | E1 | HOME.3 | Product/wedge: 3 cards + Harvey-style propose→approve→audit mock (sample data) | P0 | L | todo | SETUP.4 |
+| 7 | E1 | HOME.3 | Product/wedge: 3 cards + Harvey-style propose→approve→audit mock (sample data) | P0 | L | done | SETUP.4 |
 | 8 | E1 | HOME.4 | How it works: 4-layer architecture diagram (calm, token-driven) | P1 | M | todo | SETUP.4 |
 | 8b | E1 | HOME.4B | Three pillars (Primitives × Domains × Verticals): calm three-column section | P1 | S | todo | SETUP.4 |
 | 9 | E1 | HOME.5 | Why now (3 points) | P2 | S | todo | SETUP.4 |

@@ -64,3 +64,13 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] Both themes: dark (near-black) and light are designed; teal appears only as the motif pulse + primary CTA.
 - [ ] Mobile width (~360px): no horizontal scroll, no layout shift; headline remains the dominant element.
 - [ ] design-critique on the PR: does the hero feel at home next to linear.app / harvey.ai? Is the motif restraint, not decoration?
+
+## HOME.3 — product / wedge
+- [ ] Heading, three cards, and trust line read verbatim from content.md; no banned words.
+- [ ] The mock shows propose → approve → audit with all five audit fields (inputs, output, model, confidence, approver).
+- [ ] "Sample data — illustrative" is clearly visible on the mock; no real/implied customer, supplier, person, or metric anywhere (content-integrity check).
+- [ ] Disable JS → cards, trust line, and the full audit trail still render; any stepper degrades gracefully.
+- [ ] Keyboard: any interactive element in the mock is reachable with a visible teal focus ring; decorative icons are aria-hidden.
+- [ ] Both themes: the dense panel is legible on near-black and white; teal appears only as the approve action / active step — the panel does not read "teal."
+- [ ] Mobile (~360px): audit fields stack into labeled rows, no overflow, no layout shift.
+- [ ] design-critique on the PR: does this hit the Harvey/Hebbia trust-and-density bar?
