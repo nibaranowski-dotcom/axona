@@ -180,3 +180,46 @@ export const thesis: Thesis = {
   heading: "A robotics company's workforce is humans, machines, and agents.",
   body: "Horizontal ERPs — even the AI-native ones — model a human-only company. They can't natively orchestrate machines and agents as first-class, and they aren't tuned to robotics. The company that builds the operating system for all three, on proprietary robotics data, wins the category. That data becomes specialized models and memory that compound with every build — a moat no horizontal incumbent can copy.",
 };
+
+// ── How it works / 4-layer architecture (HOME.4) ──────────────────────────────
+// Copy is verbatim from specs/content/content.md §4 "How it works (4-layer architecture)"
+// (canonical, supersedes messaging.md). Content integrity (../CLAUDE.md): the four layers reconcile
+// to ../memory/taxonomy.md (primitives → domains → verticals) and ../memory/idea.md (humans +
+// machines + agents; specialized models + memory that compound). Exactly four layers — no fifth, no
+// extra ERP/PLM vendor names, no domain or vertical beyond the approved list; no metric or "we have
+// built" claim. Zero banned words. Consumed by a Server Component (components/how-it-works.tsx);
+// pure data, CMS-ready.
+//
+// Ordering note: `layers` is stored BOTTOM-UP — the order data flows in the stack: Foundation is the
+// base, Vertical editions is the top. The component renders the visual stack top-down (so the DOM /
+// screen-reader reading order is top→base) by reversing this array; see how-it-works.tsx.
+
+// Layer shape (type inferred from the literal below): `id` is a stable key used for React keys
+// and to single out the Intelligence spine accent; `name` + `description` are the verbatim copy.
+export const howItWorks = {
+  heading: "One system, four layers.",
+  layers: [
+    {
+      id: "foundation",
+      name: "Foundation",
+      description:
+        "connect your data, tools, and ontology (ERP/PLM/MES, email, chat).",
+    },
+    {
+      id: "intelligence",
+      name: "Intelligence spine",
+      description:
+        "specialized models + memory + agents tuned on your robotics data.",
+    },
+    {
+      id: "domain",
+      name: "Domain apps",
+      description: "procurement first, then quality, maintenance, logistics.",
+    },
+    {
+      id: "vertical",
+      name: "Vertical editions",
+      description: "packaged for your kind of robot.",
+    },
+  ],
+};
