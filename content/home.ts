@@ -313,3 +313,46 @@ export const pillars: { heading: string; framing: string; columns: Pillar[] } =
       },
     ],
   };
+
+// ── Why now (HOME.5) ───────────────────────────────────────────────────────────
+// Copy is verbatim from specs/content/content.md §6 "Why now" (canonical, supersedes
+// messaging.md). Content integrity (../CLAUDE.md): the timing thesis reconciles to
+// ../memory/market.md (the why-now / inflection: AI-accelerated R&D, robots building robots,
+// capital into humanoids/defense/space), ../memory/idea.md (specialized small models + agent
+// infrastructure make the operating layer buildable today; forward-deployed delivery that
+// compounds into product), and ../memory/decisions.md (the forward-deployed go-to-market
+// decision). Exactly three points — no fourth point, no invented metric, market-size dollar
+// figure, funding stat, date, or named fund/company beyond the verbatim copy; these are durable
+// [assumption]-grade claims and the section ships only what §6 states. Zero banned words.
+// Consumed by a Server Component (components/why-now.tsx); pure data, CMS-ready.
+
+export interface WhyNowPoint {
+  id: string;
+  text: string;
+}
+
+// Named interface (not an inline `{ ...; points: WhyNowPoint[] }` annotation) so the const
+// declaration line carries no `[]` before the array literal — keeps the typed shape while letting
+// the verify script's block matcher capture all three points.
+export interface WhyNow {
+  heading: string;
+  points: WhyNowPoint[];
+}
+
+export const whyNow: WhyNow = {
+  heading: "Why now.",
+  points: [
+    {
+      id: "inflection",
+      text: "Robotics is inflecting — AI-accelerated R&D, robots building robots, capital flooding humanoids, defense, and space.",
+    },
+    {
+      id: "substrate",
+      text: "Specialized small models + agent infrastructure make an AI-native operating layer buildable today.",
+    },
+    {
+      id: "forward-deployed",
+      text: "Forward-deployed delivery lets us ship to production with you and compound the work into product.",
+    },
+  ],
+};
