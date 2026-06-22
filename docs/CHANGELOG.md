@@ -41,3 +41,17 @@ Moved out of `CLAUDE.md` to keep the brief lean. Newest at the bottom; one entry
   email, social links. The SETUP.3 token-proof `page.tsx` was reparented under the shell (its own
   `<main>`/toggle removed; the layout now owns the single `<main>` and the toggle lives in the
   nav). Gate: `src/scripts/verify-setup-4.ts`.
+- **2026-06-22 (HOME.3):** Built the product / wedge section (`#product`), mounted after the hero in
+  `app/page.tsx`. `components/wedge.tsx` (Server Component) renders the heading, three value cards
+  (one quiet `aria-hidden` lucide icon each — meaning lives in the text), and the trust line —
+  copy verbatim from `content.md` via a new `wedge` object in `content/home.ts` (pure data; icon
+  keys map to components in the section, keeping the module CMS-ready). `components/agent-action-mock.tsx`
+  (also a Server Component) is the propose→approve→audit panel: the **full** paper trail renders
+  statically so all five auditable fields (inputs · output · model · confidence · approver) and the
+  human gate are readable with **JS disabled** — no stepper, no client leaf, no CLS. **Content
+  integrity:** sample data only — a persistent, announced "Sample data — illustrative" badge, generic
+  identifiers ("Supplier A", "Actuator HD-17"), model id "axona-procure (sample)"; no real/implied
+  customer, supplier, person, or metric, and **no AI SDK / live model call** (the data is a typed
+  const). Tokens only (no hex, no raw color utilities); teal reserved for the single Approve action;
+  the risk flag is monochrome (meaning in text). Audit trail is a semantic `<dl>` that stacks into
+  labeled rows below `sm`. Gate: `src/scripts/verify-home-3.ts`.
