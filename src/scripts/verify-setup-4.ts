@@ -81,6 +81,43 @@ async function run() {
   await check('shell page bodies render no nested <main> (layout owns the only one)', () =>
     !/<main\b/.test(read('app/page.tsx')) && !/<main\b/.test(read('app/accessibility/page.tsx')));
 
+  // LANDMARKS (R5) — exactly one of each; every <nav> is labeled; shell adds no <h1> (page owns it).
+  // Strip JSX block comments so a `<main>` mentioned in a comment isn't miscounted.
+  const strip = (s: string) => s.replace(/\{\/\*[\s\S]*?\*\/\}/g, '');
+  const count = (s: string, re: RegExp) => (s.match(re) || []).length;
+  await check('exactly one <header> (only in site-header)', () =>
+    count(strip(header), /<header\b/g) === 1 && !/<header\b/.test(strip(layout)) && !/<header\b/.test(strip(footer)));
+  await check('exactly one <footer> (only in site-footer)', () =>
+    count(strip(footer), /<footer\b/g) === 1 && !/<footer\b/.test(strip(header)));
+  await check('exactly one <main> (in layout)', () => count(strip(layout), /<main\b/g) === 1);
+  await check('header + footer each expose a labeled <nav>', () =>
+    /<nav[^>]*aria-label=/.test(header) && /<nav[^>]*aria-label=/.test(footer));
+  await check('no unlabeled <nav> anywhere in the shell', () =>
+    [header, footer, mobileNav].every((s) => count(strip(s), /<nav\b/g) === count(strip(s), /<nav[^>]*aria-label=/g)));
+  await check('shell adds no <h1> — the page owns the only one', () =>
+    !/<h1\b/.test(header) && !/<h1\b/.test(footer) && /<h1\b/.test(read('app/page.tsx')));
+
+  // SKIP LINK FIRST (R4) — must be the first focusable element, before the header.
+  await check('skip link is the FIRST focusable (precedes <SiteHeader>)', () => {
+    const sk = layout.indexOf('href="#main"');
+    const hd = layout.indexOf('<SiteHeader');
+    return sk > -1 && hd > -1 && sk < hd;
+  });
+
+  // MOBILE MENU A11Y (R6) — Radix Dialog supplies aria-expanded/-controls on the trigger, focus
+  // trap + return-to-trigger, Escape-to-close, and scroll-lock. Assert it's built on Dialog (those
+  // ARIA attrs are injected at runtime, so we verify the mechanism, not a static string).
+  await check('mobile menu built on Radix Dialog (focus trap / Esc / aria-expanded for free)', () =>
+    /from "radix-ui"/.test(mobileNav) && /Dialog\.Root/.test(mobileNav) && /Dialog\.Trigger/.test(mobileNav) && /Dialog\.Content/.test(mobileNav));
+
+  // CTA (R9) — reserved anchor, never a dead link.
+  await check('primary CTA targets a reserved anchor (#request-access), not "/" or "#"', () =>
+    /#request-access/.test(siteContent) && !/primaryCta[^]*href:\s*["']#?["']/.test(siteContent));
+
+  // REDUCED MOTION (R2/AC7) — honored globally so the hairline/animations snap, not animate.
+  await check('prefers-reduced-motion honored (globals.css)', () =>
+    /prefers-reduced-motion/.test(read('app/globals.css')));
+
   if (failed === 0) { console.log(`\nPASSED — ${passed} checks`); console.log('See docs/manual-checks.md for browser verification.'); }
   else { console.log(`\nFAILED — ${failed} check(s) failed`); process.exit(1); }
 }
