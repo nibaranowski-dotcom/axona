@@ -1,12 +1,11 @@
 {
-  "$comment": "Axona website — Claude Code settings. Commit this; keep secrets in settings.local.json (gitignored). Confirm model name + hook command availability in the 'verify latest' pass.",
   "permissions": {
-    "defaultMode": "acceptEdits",
     "deny": [
       "Bash(git push --force:*)",
       "Bash(git push -f:*)",
       "Bash(rm -rf:*)"
-    ]
+    ],
+    "defaultMode": "acceptEdits"
   },
   "hooks": {
     "PreToolUse": [
@@ -42,5 +41,9 @@
         ]
       }
     ]
+  },
+  "$comment": "Axona website — Claude Code settings. Commit this; keep secrets in settings.local.json (gitignored). Confirm model name + hook command availability in the 'verify latest' pass.",
+  "enabledPlugins": {
+    "frontend-design@claude-plugins-official": true
   }
 }
