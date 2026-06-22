@@ -223,3 +223,93 @@ export const howItWorks = {
     },
   ],
 };
+
+// ── The three pillars / Primitives × Domains × Verticals (HOME.4B) ─────────────
+// Copy is verbatim from specs/content/content.md §5 "The three pillars — Primitives × Domains ×
+// Verticals" (canonical, supersedes messaging.md). Content integrity (../CLAUDE.md): the taxonomy
+// reconciles to ../memory/taxonomy.md (verticals · domains · primitives) and ../memory/idea.md
+// (build the primitives once → compose into domain workflows → package per vertical; agents
+// self-improving with skills, context, memory, multimodal/multi-cloud reach). No invented
+// primitive, domain, vertical, metric, customer, or claim; the lists are exact and in order; zero
+// banned words. The wedge markers — "Procurement (the wedge)" and "Humanoids (first)" — are kept
+// verbatim; the component reads those parentheticals to place the single teal accent (the words
+// carry the meaning, teal only reinforces). This is the model — NOT the four implementation layers
+// (that is `howItWorks` / content.md §4, a separate shipped section). Consumed by a Server Component
+// (components/pillars.tsx); pure data, CMS-ready.
+//
+// Verbatim source of record (content.md §5) — items[] below are the same tokens, in order; the
+// trailing period belongs to the source sentence, not the rendered chips. Each pillar's sentence is
+// kept on a single line so it reads (and verifies) as the exact verbatim copy:
+// Primitives (the elements): SOPs, documents, data, agents, humans, machines (fixed + mobile), inventory, meetings, integrations, interfaces. Agents are self-improving, with skills, context, memory, and multimodal, multi-cloud reach.
+// Domains (the functions): Procurement (the wedge), then manufacturing, quality & testing, logistics, field service, R&D, IT/security, sales, marketing.
+// Verticals (the markets): Humanoids (first), defense, logistics, manufacturing, construction, healthcare, space, automotive.
+
+/** One pillar column. `kind` is the parenthetical that names what the pillar is ("the elements" /
+ *  "the functions" / "the markets"). `items` is the verbatim comma-list, one token per entry, in
+ *  order. `note` (Primitives only) is the trailing self-improving-agents sentence, modeled
+ *  distinctly from the list items. */
+export interface Pillar {
+  id: string;
+  name: string;
+  kind: string;
+  items: string[];
+  note?: string;
+}
+
+export const pillars: { heading: string; framing: string; columns: Pillar[] } =
+  {
+    heading: "Built once. Composed everywhere.",
+    framing:
+      "Build the primitives once → compose them into domain workflows → package per vertical.",
+    columns: [
+      {
+        id: "primitives",
+        name: "Primitives",
+        kind: "the elements",
+        items: [
+          "SOPs",
+          "documents",
+          "data",
+          "agents",
+          "humans",
+          "machines (fixed + mobile)",
+          "inventory",
+          "meetings",
+          "integrations",
+          "interfaces",
+        ],
+        note: "Agents are self-improving, with skills, context, memory, and multimodal, multi-cloud reach.",
+      },
+      {
+        id: "domains",
+        name: "Domains",
+        kind: "the functions",
+        items: [
+          "Procurement (the wedge)",
+          "then manufacturing",
+          "quality & testing",
+          "logistics",
+          "field service",
+          "R&D",
+          "IT/security",
+          "sales",
+          "marketing",
+        ],
+      },
+      {
+        id: "verticals",
+        name: "Verticals",
+        kind: "the markets",
+        items: [
+          "Humanoids (first)",
+          "defense",
+          "logistics",
+          "manufacturing",
+          "construction",
+          "healthcare",
+          "space",
+          "automotive",
+        ],
+      },
+    ],
+  };
