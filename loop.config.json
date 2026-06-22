@@ -4,7 +4,7 @@
   "specsDir": "specs",
   "plannerAgent": "joe",
   "builderAgent": "builder",
-  "gateCommand": "pnpm verify src/scripts/verify-<id>.ts && pnpm exec tsc --noEmit",
+  "gateCommand": "pnpm verify src/scripts/verify-<id>.ts && pnpm exec tsc --noEmit && pnpm lint",
   "hookGate": "pnpm exec tsc --noEmit",
   "maxRetries": 2,
   "git": {
