@@ -145,9 +145,11 @@ function getCprd(text, id) {
 }
 
 // ---------- prompts ----------
-function plannerPrompt(cprd) {
+// The planner WRITES the PRD to specs/<id>.md itself (via its Write tool). The runner does NOT
+// redirect the planner's stdout into the file — stdout is just its chatter, not the deliverable.
+function plannerPrompt(cprd, id) {
   const at = cfg.plannerAgent ? `@${cfg.plannerAgent} ` : '';
-  return `${at}CPRD "${cprd}"`;
+  return `${at}Using the CPRD trigger for this row, write the COMPLETE PRD to ${specPath(id)} in the exact CPRD format — every section. The file is the deliverable; print no summary or preamble. Row: ${cprd}`;
 }
 function builderPrompt(id, lastFail) {
   const at = cfg.builderAgent ? `@${cfg.builderAgent} ` : '';
@@ -177,6 +179,28 @@ function runClaude(prompt, { json = false } = {}) {
   } catch {
     return out;
   }
+}
+
+// ---------- planner output validation ----------
+// A real PRD is the file, not a chat summary. Guard against the planner writing a short recap
+// (or nothing) into specs/<id>.md before we ever hand it to the Builder.
+const REQUIRED_PRD_HEADERS = [
+  '## Problem Statement',
+  '## Success Metrics',
+  '## Detailed Requirements',
+  '## Acceptance Criteria',
+  '## Technical Requirements',
+  '## Verification Script',
+  '## Rollback Plan',
+];
+function validatePrd(path) {
+  if (!existsSync(path)) return { ok: false, reason: 'file not written' };
+  const text = readFileSync(path, 'utf8');
+  const lines = text.split('\n').length;
+  if (lines < 120) return { ok: false, reason: `only ${lines} lines (need ≥120) — looks like a summary, not a full PRD` };
+  const missing = REQUIRED_PRD_HEADERS.filter((h) => !text.includes(h));
+  if (missing.length) return { ok: false, reason: `missing sections: ${missing.join(', ')}` };
+  return { ok: true, lines };
 }
 
 // ---------- gate ----------
@@ -448,9 +472,9 @@ async function main() {
     console.log(`\nspecs/${row.id}.md exists? ${specExists ? 'yes (planner SKIPPED)' : 'no (planner runs)'}`);
     if (!specExists) {
       const cprd = getCprd(backlogText, row.id);
-      console.log('\nWould run PLANNER:');
-      console.log(`  claude -p ${JSON.stringify(plannerPrompt(cprd ?? row.id))} --output-format json`);
-      console.log(`  -> save stdout to ${specPath(row.id)}`);
+      console.log('\nWould run PLANNER (agent writes the file via Write; stdout is not captured):');
+      console.log(`  claude -p ${JSON.stringify(plannerPrompt(cprd ?? row.id, row.id))}`);
+      console.log(`  -> then validate ${specPath(row.id)} (exists, ≥120 lines, required CPRD sections); retry/escalate if invalid`);
     }
     console.log('\nWould isolate on BRANCH:');
     console.log(`  git fetch ${GIT.remote} ${GIT.baseBranch} && git switch -C ${branchName(row.id)} ${GIT.remote}/${GIT.baseBranch}`);
@@ -513,25 +537,36 @@ async function main() {
     const branch = startBranch(row.id);
     console.log(`[git] on branch ${branch} (off ${GIT.remote}/${GIT.baseBranch})`);
 
-    // 1) Planner writes the PRD (idempotent: skip if spec already exists)
-    let prdOk = true;
-    if (!existsSync(specPath(row.id))) {
-      const cprd = getCprd(backlogText, row.id) ?? row.id;
-      console.log(`[planner] ${cfg.plannerAgent || 'inline'} writing ${specPath(row.id)} …`);
-      try {
-        const prd = runClaude(plannerPrompt(cprd), { json: true });
-        writeFileSync(specPath(row.id), prd);
-      } catch (e) {
-        prdOk = false;
-        console.error(`[planner] FAILED: ${e.message}`);
+    // 1) Planner: the agent WRITES the full PRD to specs/<id>.md via its Write tool (we do NOT
+    //    redirect its stdout into the file). Validate before building — a summary/short file or one
+    //    missing CPRD sections is rejected and retried; never hand a malformed spec to the Builder.
+    //    Idempotent: skip if a VALID spec already exists.
+    const sp = specPath(row.id);
+    let prd = validatePrd(sp);
+    if (prd.ok) {
+      console.log(`[planner] ${sp} already valid (${prd.lines} lines) — skipping.`);
+    } else {
+      let ptries = 0;
+      while (!prd.ok && ptries <= MAX_RETRIES) {
+        const cprd = getCprd(backlogText, row.id) ?? row.id;
+        console.log(`[planner] ${cfg.plannerAgent || 'inline'} writing ${sp} (attempt ${ptries + 1}/${MAX_RETRIES + 1}) …`);
+        try {
+          runClaude(plannerPrompt(cprd, row.id)); // agent writes the file; stdout is not the deliverable
+        } catch (e) {
+          console.error(`[planner] invocation error: ${e.message}`);
+        }
+        prd = validatePrd(sp);
+        if (!prd.ok) {
+          console.log(`[planner] INVALID PRD: ${prd.reason}`);
+          ptries++;
+        }
       }
-      if (!prdOk) {
-        logRun({ id: row.id, prd_ok: false, build_ok: false, gate_ok: false, retries: 0, commit_sha: null });
-        console.log(`ESCALATE — ${row.id} planner step failed. Stopping.`);
+      if (!prd.ok) {
+        logRun({ id: row.id, prd_ok: false, build_ok: false, gate_ok: false, retries: ptries, commit_sha: null, branch });
+        console.log(`ESCALATE — ${row.id} planner produced no valid PRD after ${ptries} attempt(s). NOT building. Inspect ${sp}.`);
         break;
       }
-    } else {
-      console.log(`[planner] ${specPath(row.id)} exists — skipping.`);
+      console.log(`[planner] valid PRD written (${prd.lines} lines).`);
     }
 
     // 2) Builder implements + self-gates; runner re-checks the gate as the authority.
