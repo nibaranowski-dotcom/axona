@@ -128,3 +128,16 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] prefers-reduced-motion on: any stagger/fade renders static.
 - [ ] Mobile (~360px): points stack to one column, each keeps a readable measure, no horizontal scroll, no layout shift.
 - [ ] design-critique on the PR: does an a16z partner read this and see a deliberate "why now," at the linear/harvey bar?
+
+## HOME.7 — who it's for (verticals strip + buyer/champion framing)
+- [ ] Heading, the Now/Next/Then verticals strip (humanoids · defense · logistics, industrial, space), and the buyer/champion line read verbatim from content.md §8; no banned words, no added/removed/reordered vertical, stage, or role.
+- [ ] The section reads as a calm verticals strip + roles line, not a customer-logo wall, gradient persona cards, emoji icons, or a centered template.
+- [ ] Disable JS in DevTools → reload: the full heading, strip, and buyer/champion line render.
+- [ ] Section sits after the thesis; page has exactly one <h1> (the hero), heading here is <h2>.
+- [ ] Screen-reader / tab-walk: the three stages are announced in order as an ordered list; the buyer/champion line is announced as a labeled pair; the live "Now" is conveyed by the word "Now", not color alone.
+- [ ] Token-driven: inspect element — colors/borders/radius/Now-accent come from CSS variables/tokens; no inline hex, no raw Tailwind color utilities.
+- [ ] Both themes: dark (near-black) and light are designed; the teal "Now" marker reads correctly on both; copy passes AA; section reads near-monochrome (one accent on Now).
+- [ ] No customer/partner logo, named entity, count, or metric appears anywhere in the section.
+- [ ] prefers-reduced-motion on: any Now-marker highlight renders static.
+- [ ] Mobile (~360px): stages stack to one column (Now → Next → Then), the buyer/champion line wraps, no horizontal scroll, no layout shift.
+- [ ] design-critique on the PR: does a VP of Ops at a humanoid maker self-identify in one scan, and does an a16z partner read a deliberate beachhead sequence — at the linear/harvey bar?

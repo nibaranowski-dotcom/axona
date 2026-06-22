@@ -28,7 +28,7 @@ Field order (Joe's trigger): **position · Epic · Track · StoryID · Title · 
 | 8b | E1 | HOME.4B | Three pillars (Primitives × Domains × Verticals): calm three-column section | P1 | S | done | SETUP.4 |
 | 9 | E1 | HOME.5 | Why now (3 points) | P2 | S | done | SETUP.4 |
 | 10 | E1 | HOME.6 | The thesis / "our secret" section | P1 | S | done | SETUP.4 |
-| 11 | E1 | HOME.7 | Who it's for: verticals strip + buyer/champion framing | P2 | S | todo | SETUP.4 |
+| 11 | E1 | HOME.7 | Who it's for: verticals strip + buyer/champion framing | P2 | S | done | SETUP.4 |
 | 12 | E1 | HOME.8 | Company / join-us section (Julia surface); bios gated until confirmed [human-gate] | P1 | M | todo | SETUP.4 |
 | 13 | E1 | HOME.9 | Final CTA band | P1 | S | todo | HOME.1 |
 | 14 | E2 | SEO.1 | Per-page metadata + OG image gen + canonical; Organization JSON-LD | P0 | M | todo | SETUP.2 |

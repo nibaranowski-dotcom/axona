@@ -356,3 +356,56 @@ export const whyNow: WhyNow = {
     },
   ],
 };
+
+// ── Who it's for (HOME.7) ──────────────────────────────────────────────────────
+// Copy is verbatim from specs/content/content.md §8 "Who it's for" (canonical content of record,
+// supersedes messaging.md). Content integrity (../CLAUDE.md): the roles reconcile to
+// ../memory/icp.md (economic buyer = VP/Head of Operations, COO, Head of Supply Chain; champion =
+// procurement/ops lead) and the vertical sequence to ../memory/taxonomy.md (humanoids first, then
+// defense, then logistics/industrial/space). This ships ONLY the §8 Now/Next/Then go-to-market
+// sequence — NOT the full eight-vertical Verticals pillar (that is `pillars` / content.md §5,
+// shipped). No invented role, vertical, count, customer, emblem, or metric; no proof-wall rail;
+// zero banned words. Consumed by a Server Component (components/who-its-for.tsx); pure data,
+// CMS-ready.
+//
+// The three stages are stored in display order (Now → Next → Then); `label` is the verbatim stage
+// word and carries the sequence meaning (the component reads `id === "now"` only to place the
+// single teal accent — the word "Now", not color, conveys the live beachhead). Buyer/champion are
+// modeled as { role, text } (the "role label + text" R4 asks for); `role` holds the verbatim
+// "Buyer"/"Champion" label, `text` the verbatim roles. The component renders Buyer then Champion.
+
+export interface AudienceStage {
+  /** Stable key; "now" singles out the live beachhead for the one teal accent. */
+  id: string;
+  /** Verbatim stage word — "Now" / "Next" / "Then". Carries the sequence (not color). */
+  label: string;
+  /** The vertical(s) at this stage, verbatim. */
+  items: string;
+}
+
+/** Buyer or champion. `role` = verbatim label ("Buyer"/"Champion"); `text` = verbatim roles. */
+export interface AudienceRole {
+  role: string;
+  text: string;
+}
+
+export interface WhoItsFor {
+  heading: string;
+  stages: AudienceStage[];
+  buyer: AudienceRole;
+  champion: AudienceRole;
+}
+
+export const whoItsFor: WhoItsFor = {
+  heading: "Built for robotics makers scaling production.",
+  stages: [
+    { id: "now", label: "Now", items: "Humanoid robotics makers." },
+    { id: "next", label: "Next", items: "Defense." },
+    { id: "then", label: "Then", items: "Logistics, industrial, space." },
+  ],
+  buyer: {
+    role: "Buyer",
+    text: "VP/Head of Operations, COO, Head of Supply Chain.",
+  },
+  champion: { role: "Champion", text: "procurement / ops lead." },
+};
