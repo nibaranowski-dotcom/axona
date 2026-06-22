@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
+import { ThemeProvider } from "@/components/theme-provider";
 import "./globals.css";
 
 // Self-hosted Geist via the `geist` package (not the Google-fonts loader): exposes the
@@ -18,11 +19,26 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // suppressHydrationWarning: next-themes writes the theme class to <html> before hydration,
+    // which would otherwise trip a server/client mismatch warning. This is the only attribute
+    // it silences — it does not mask other mismatches.
     <html
       lang="en"
+      suppressHydrationWarning
       className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
     >
-      <body className="min-h-full">{children}</body>
+      <body className="min-h-full">
+        {/* Dark is the default; enableSystem honors prefers-color-scheme when no choice is stored;
+            disableTransitionOnChange prevents a color flash when switching themes. */}
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="dark"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {children}
+        </ThemeProvider>
+      </body>
     </html>
   );
 }
