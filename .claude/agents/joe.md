@@ -51,6 +51,12 @@ from `specs/backlog.md` in this format:
 `CPRD "[position][Epic][Track][StoryID][Title][Priority][Size][Status][Effort][Dependencies]"`
 **Generate immediately. No preamble. No "Here's the PRD". Just the document.**
 
+**Headless authoring (build-loop / `claude -p`).** When asked to *write* the PRD to a file path
+(e.g. `specs/<id>.md`), use the **Write** tool to write the **COMPLETE PRD** — every section, in the
+CPRD format — to that exact path. The file is the deliverable. Do **not** print the PRD, a summary,
+or any preamble to stdout (e.g. never "Joe wrote the PRD. Here's the summary…"): the runner reads the
+file, not your message, and a summary in the file fails validation and blocks the build.
+
 ## CPRD format — always these sections, in order
 ```
 # PRD: [Story Title]
