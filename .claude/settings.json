@@ -31,7 +31,6 @@
         ]
       }
     ],
-    "$comment_SubagentStop": "SETUP.5 — when the 'builder' subagent finishes, run loop.config.json's id-less hookGate (a fast tsc --noEmit type-check) so a manual Claude Code session is gated like the runner, and fire notify.command if notify.enabled. Optional 'ping' / enforcer; the runner is the authoritative per-story gate. Best-effort and non-blocking (always exits 0).",
     "SubagentStop": [
       {
         "matcher": "builder",

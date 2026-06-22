@@ -11,10 +11,14 @@ The marketing site for Axona. This repo is set up as a **stage** for two operato
 2. **Generate the PRD:** give Joe the row — `CPRD "<row>"` — he emits a full PRD (no preamble).
    Save it to `specs/<STORY-ID>.md`.
 3. **Build:** in the terminal, tell Claude Code: *"Implement `specs/<STORY-ID>.md`, follow
-   CLAUDE.md and design.md."*
+   CLAUDE.md and design.md."* For non-trivial manual sessions, start in Plan Mode, approve the plan,
+   then auto-accept edits. The verify script + tsc are mandatory before "done."
 4. **Gate:** run accessibility-review + design-critique before merge. Verify script passes,
    `tsc --noEmit` clean, manual checks in `docs/manual-checks.md` done.
-5. **Ship:** commit → push → Vercel deploy. Move to the next story.
+5. **Ship:** land work on an `auto/<id>` (or `chore/…`) branch → open a PR against `main`. **Merge
+   from the terminal with `gh pr merge <n> --merge --delete-branch` — never via the GitHub UI.**
+   `main` is protected (PR required; direct push blocked), so merging via `gh` is the project norm
+   and keeps the merged branch cleaned up. Vercel deploys from `main`. Move to the next story.
 
 ## Autonomous build loop (SETUP.5)
 The operating loop above can run unattended for **mechanical** stories. `scripts/build-loop.mjs`
