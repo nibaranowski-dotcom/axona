@@ -105,17 +105,15 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] Mobile (~360px): bands wrap full-width, descriptions keep a readable measure, no horizontal scroll, no layout shift.
 - [ ] design-critique on the PR: does Julia read this and see a platform with a defensible intelligence spine, at the linear/harvey bar?
 
-## HOME.4B — three pillars (Primitives × Domains × Verticals)
-- [ ] Heading, framing line, and all three pillars (Primitives, Domains, Verticals) with their full item lists read verbatim from content.md §5; no banned words, no added/removed/reordered item, no fourth pillar.
-- [ ] The section reads as a calm three-column model (built once → composed everywhere), not gradient cards, drop shadows, emoji bullets, or a centered template.
-- [ ] Disable JS in DevTools → reload: the full heading, framing line, and all three columns with their lists render.
-- [ ] Section sits between how-it-works and the thesis; page has exactly one <h1> (the hero), heading here is <h2>.
-- [ ] Screen-reader / tab-walk: the three pillars are announced in order as named regions, each with a list; the wedge is conveyed by the words "(the wedge)" / "(first)", not color alone.
-- [ ] Token-driven: inspect element — colors/borders/radius/wedge-accent come from CSS variables/tokens; no inline hex, no raw Tailwind color utilities.
-- [ ] Both themes: dark (near-black) and light are designed; the teal wedge markers read correctly on both; items pass AA; section reads near-monochrome (one accent on the wedge).
-- [ ] prefers-reduced-motion on: any wedge-marker highlight renders static.
-- [ ] Mobile (~360px): columns stack to one (Primitives → Domains → Verticals), lists keep a readable measure, no horizontal scroll, no layout shift.
-- [ ] design-critique on the PR: does Julia read this and see "built once, composed everywhere" — combinatorial leverage across an industry — at the linear/harvey bar?
+## HOME.4B — three pillars (redesign v2)
+- [ ] Reads as a structured section: three bordered panels (bg-card + hairline), items as chips, NOT a flat text list.
+- [ ] The Primitives → Domains → Verticals composition is visually clear (monochrome arrow connective between/through the panels).
+- [ ] "Procurement (the wedge)" and "Humanoids (first)" are the teal-signalled chips (outlined); no third teal element; section reads near-monochrome.
+- [ ] Heading + framing line + all items verbatim from content.md §5; the → arrows render correctly (no mojibake). (Note: the §5 prose connective "then" is dropped from the Domains chips per v2 R3 — chips are items, not prose.)
+- [ ] Both themes designed; chips pass AA contrast; disable JS → full section renders.
+- [ ] Mobile (~360px): panels stack, the connective rotates to a downward chevron, chips wrap, no overflow, no layout shift.
+- [ ] Section keeps its place (after How it works, before Why now); page still has exactly one <h1> (the hero), heading here is <h2> with <h3> per panel.
+- [ ] design-critique: does it now sit at the same bar as the hero/wedge?
 
 ## HOME.5 — why now (3 points)
 - [ ] Heading + all three points (robotics inflecting · buildable substrate today · forward-deployed) read verbatim from content.md §6; no banned words, no added/removed/reordered point, no invented metric, date, or market-size number.
