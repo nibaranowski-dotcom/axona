@@ -74,3 +74,12 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] Both themes: the dense panel is legible on near-black and white; teal appears only as the approve action / active step — the panel does not read "teal."
 - [ ] Mobile (~360px): audit fields stack into labeled rows, no overflow, no layout shift.
 - [ ] design-critique on the PR: does this hit the Harvey/Hebbia trust-and-density bar?
+
+## HOME.2 — the problem section
+- [ ] Heading and body read verbatim from content.md §2; no banned words, no paraphrase.
+- [ ] Disable JS in DevTools → reload: the heading and body fully render (no interactivity needed).
+- [ ] Section sits between the hero and the wedge; page has exactly one <h1> (the hero), heading here is <h2>.
+- [ ] Both themes: dark (near-black) and light are designed; body contrast passes AA; the section reads near-monochrome (no teal fill).
+- [ ] Mobile (~360px): heading wraps cleanly, body keeps a readable measure, no horizontal scroll, no layout shift.
+- [ ] Reading the page top-down — category (hero) → pain (problem) → proof (wedge) — the narrative holds.
+- [ ] design-critique on the PR: does an ops leader read this and think "that's my week"? Restraint, not decoration?

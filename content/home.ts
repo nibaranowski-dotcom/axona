@@ -34,6 +34,24 @@ export const hero: Hero = {
     "Working with a first cohort of design partners in humanoid and defense robotics.",
 };
 
+// ── The problem (HOME.2) ──────────────────────────────────────────────────────
+// Copy is verbatim from specs/content/content.md §2 "The problem" (canonical content of record,
+// supersedes messaging.md). Content integrity (../CLAUDE.md): the narrative reconciles to
+// ../memory/ (idea: AI-native OS for robotics; icp: VP/Head of Ops at humanoid/defense makers) —
+// no invented metric, customer, supplier, or traction; zero banned words. Consumed by a Server
+// Component (components/problem.tsx); no live data, CMS-ready.
+
+export interface Problem {
+  heading: string;
+  body: string;
+}
+
+export const problem: Problem = {
+  heading:
+    "Robotics scales on hardware. Operations still run on spreadsheets.",
+  body: "Sourcing long-lead components, absorbing weekly BOM changes, tracking which parts and firmware went into which unit, and keeping fielded fleets up — most of it lives in spreadsheets, email, and ERPs built for a human-only workforce. The result: ramps slip by months and your best engineers spend their week chasing parts.",
+};
+
 // ── Product / wedge (HOME.3) ──────────────────────────────────────────────────
 // Copy is verbatim from specs/content/content.md §"The product / wedge". The mock below is
 // SAMPLE / ILLUSTRATIVE data only — content integrity (../CLAUDE.md): no real or plausible-as-real
