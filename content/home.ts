@@ -244,15 +244,23 @@ export const howItWorks = {
 // Domains (the functions): Procurement (the wedge), then manufacturing, quality & testing, logistics, field service, R&D, IT/security, sales, marketing.
 // Verticals (the markets): Humanoids (first), defense, logistics, manufacturing, construction, healthcare, space, automotive.
 
-/** One pillar column. `kind` is the parenthetical that names what the pillar is ("the elements" /
- *  "the functions" / "the markets"). `items` is the verbatim comma-list, one token per entry, in
- *  order. `note` (Primitives only) is the trailing self-improving-agents sentence, modeled
- *  distinctly from the list items. */
+/** One pillar item, rendered as a chip. `lead` marks the single emphasized item per pillar — the
+ *  wedge ("Procurement (the wedge)") and the first vertical ("Humanoids (first)") — so the COMPONENT
+ *  drives the teal accent from this flag, never from hardcoded copy matching. Keeps content CMS-clean
+ *  and the signal in one place (≤ 2 teal chips total). */
+export interface PillarItem {
+  label: string;
+  lead?: boolean;
+}
+
+/** One pillar column. `parenthetical` names what the pillar is ("the elements" / "the functions" /
+ *  "the markets"). `items` are the verbatim tokens (chips), in order. `note` (Primitives only) is the
+ *  trailing self-improving-agents sentence, modeled distinctly from the chips. */
 export interface Pillar {
   id: string;
-  name: string;
-  kind: string;
-  items: string[];
+  label: string;
+  parenthetical: string;
+  items: PillarItem[];
   note?: string;
 }
 
@@ -264,51 +272,53 @@ export const pillars: { heading: string; framing: string; columns: Pillar[] } =
     columns: [
       {
         id: "primitives",
-        name: "Primitives",
-        kind: "the elements",
+        label: "Primitives",
+        parenthetical: "the elements",
         items: [
-          "SOPs",
-          "documents",
-          "data",
-          "agents",
-          "humans",
-          "machines (fixed + mobile)",
-          "inventory",
-          "meetings",
-          "integrations",
-          "interfaces",
+          { label: "SOPs" },
+          { label: "documents" },
+          { label: "data" },
+          { label: "agents" },
+          { label: "humans" },
+          { label: "machines (fixed + mobile)" },
+          { label: "inventory" },
+          { label: "meetings" },
+          { label: "integrations" },
+          { label: "interfaces" },
         ],
         note: "Agents are self-improving, with skills, context, memory, and multimodal, multi-cloud reach.",
       },
       {
         id: "domains",
-        name: "Domains",
-        kind: "the functions",
+        label: "Domains",
+        parenthetical: "the functions",
+        // "Procurement (the wedge)" is the lead. The §5 prose connective "then" is dropped: chips are
+        // items, not prose (HOME.4B v2 R3 / edge-case "ordering words collapse"). PRD wins over §5 here.
         items: [
-          "Procurement (the wedge)",
-          "then manufacturing",
-          "quality & testing",
-          "logistics",
-          "field service",
-          "R&D",
-          "IT/security",
-          "sales",
-          "marketing",
+          { label: "Procurement (the wedge)", lead: true },
+          { label: "manufacturing" },
+          { label: "quality & testing" },
+          { label: "logistics" },
+          { label: "field service" },
+          { label: "R&D" },
+          { label: "IT/security" },
+          { label: "sales" },
+          { label: "marketing" },
         ],
       },
       {
         id: "verticals",
-        name: "Verticals",
-        kind: "the markets",
+        label: "Verticals",
+        parenthetical: "the markets",
         items: [
-          "Humanoids (first)",
-          "defense",
-          "logistics",
-          "manufacturing",
-          "construction",
-          "healthcare",
-          "space",
-          "automotive",
+          { label: "Humanoids (first)", lead: true },
+          { label: "defense" },
+          { label: "logistics" },
+          { label: "manufacturing" },
+          { label: "construction" },
+          { label: "healthcare" },
+          { label: "space" },
+          { label: "automotive" },
         ],
       },
     ],
