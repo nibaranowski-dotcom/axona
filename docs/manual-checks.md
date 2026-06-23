@@ -4,18 +4,21 @@ Cowork/Claude Code reads this after Claude Code implements a story, then runs th
 Joe appends a block per story. Keep newest at the bottom.
 
 ## SETUP.0 — repo sanity (seed)
+
 - [ ] `pnpm dev` runs; homepage renders with no console errors.
 - [ ] Dark theme is the default; light toggle works and is designed (not auto-inverted).
 - [ ] No raw hex / Tailwind color utilities in components (tokens only).
 - [ ] `tsc --noEmit` clean.
 
 ## SETUP.1 — verify-latest pass / pinned versions
+
 - [ ] CLAUDE.md "Verified stack (pinned 2026-06-21)" block reads cleanly and names Next 16, shadcn New York + radix-ui, WCAG 2.2 AA, Node ≥ 20.
 - [ ] Changelog one-liner is present and dated.
 - [ ] No package.json / app code was added in this story (docs-only).
 - [ ] Spot-check one source link still resolves (Next.js releases, shadcn changelog, or W3C WCAG).
 
 ## SETUP.2 — Next.js scaffold
+
 - [ ] `pnpm dev` serves `/` with the placeholder ("Axona — scaffold"); no console errors.
 - [ ] `pnpm build` completes with Turbopack; `pnpm start` serves the production build.
 - [ ] `pnpm typecheck` and `pnpm lint` are clean (0 errors; lint emits 3 pre-existing warnings from the verify-script `check` helper).
@@ -26,6 +29,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] NOTE (version drift): shadcn CLI v4 (2026) replaced named styles with presets — `components.json` reads `"style": "radix-nova"` (the Geist/Lucide Nova preset, New York's successor on the unified `radix-ui` base). CLAUDE.md still says "New York"; reconcile the label on the next verify pass / in SETUP.3.
 
 ## SETUP.5 — autonomous build loop
+
 - [ ] `node scripts/build-loop.mjs --dry-run` prints the correct next story + the Joe/Builder prompts (and the branch/PR plan), and writes nothing.
 - [ ] `--once` on a mechanical story: branch `auto/<id>` created off `main`, PRD written, implemented, gate green, row flipped to done, commit + push + PR opened.
 - [ ] The PR targets `main`, its body links the spec + run log, and it is NOT merged by the loop.
@@ -38,6 +42,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] Branch protection on `main` is enabled (require PR + review; block direct pushes) — recommended backstop.
 
 ## SETUP.3 — design tokens + theming
+
 - [ ] Dark is the default with no stored choice; switching OS appearance flips the site (prefers-color-scheme honored).
 - [ ] Toggle overrides OS, persists across reloads, and there is NO flash of the wrong theme on reload.
 - [ ] Toggle is reachable by keyboard, shows a visible teal focus ring, and has a sensible aria-label; respects reduced-motion.
@@ -47,6 +52,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] Run design-critique on the PR: does the themed proof page feel at home next to linear.app? Dark designed, not inverted?
 
 ## SETUP.4 — app shell (nav + footer + a11y statement)
+
 - [ ] `pnpm dev` serves `/` inside the shell: sticky header (wordmark, Product/How it works/Company, theme toggle, "Request access"), page body, footer — no console errors.
 - [ ] Scroll down: a 1px hairline fades in under the header; scroll back to top: it fades out. The header never jumps/changes height (no CLS). Confirm in DevTools Performance there's no per-frame scroll handler.
 - [ ] Tab from page load: the FIRST focus is "Skip to content"; activating it moves focus into `<main>` and the next Tab lands inside the content (not back in the nav).
@@ -57,6 +63,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] Sign-off still pending (rendered as placeholders, not invented): legal entity + registered address, Privacy/Terms URLs, public accessibility email, social links.
 
 ## HOME.1 — hero
+
 - [ ] Lighthouse (mobile, throttled): LCP element is the H1, LCP ≤ 2.0s, CLS ≤ 0.05, INP ≤ 200ms.
 - [ ] Disable JS in DevTools → reload: headline, subhead, CTAs, and a static motif all render; CTAs are clickable.
 - [ ] Toggle prefers-reduced-motion → the axon pulse stops animating (renders at rest); everything else intact.
@@ -66,6 +73,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] design-critique on the PR: does the hero feel at home next to linear.app / harvey.ai? Is the motif restraint, not decoration?
 
 ## HOME.3 — product / wedge
+
 - [ ] Heading, three cards, and trust line read verbatim from content.md; no banned words.
 - [ ] The mock shows propose → approve → audit with all five audit fields (inputs, output, model, confidence, approver).
 - [ ] "Sample data — illustrative" is clearly visible on the mock; no real/implied customer, supplier, person, or metric anywhere (content-integrity check).
@@ -76,6 +84,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] design-critique on the PR: does this hit the Harvey/Hebbia trust-and-density bar?
 
 ## HOME.2 — the problem section
+
 - [ ] Heading and body read verbatim from content.md §2; no banned words, no paraphrase.
 - [ ] Disable JS in DevTools → reload: the heading and body fully render (no interactivity needed).
 - [ ] Section sits between the hero and the wedge; page has exactly one <h1> (the hero), heading here is <h2>.
@@ -85,6 +94,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] design-critique on the PR: does an ops leader read this and think "that's my week"? Restraint, not decoration?
 
 ## HOME.6 — thesis
+
 - [ ] Heading + body read verbatim from content.md §7; no banned words; no invented metric/claim.
 - [ ] Reads as a deliberate editorial statement — strong type hierarchy, generous measure/rhythm — not a flat paragraph or a boxed callout.
 - [ ] Disable JS → the full thesis renders.
@@ -93,6 +103,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] design-critique on the PR: does this land the category argument with the weight it deserves, at the linear/harvey bar?
 
 ## HOME.4 — how it works (4-layer architecture)
+
 - [ ] Heading + all four layers (Foundation, Intelligence spine, Domain apps, Vertical editions) read verbatim from content.md §4; no banned words, no fifth layer, no invented example.
 - [ ] The diagram reads as a real stacked architecture (Foundation at the base → Vertical editions on top), not a gradient/shadow flowchart or a default-font diagram.
 - [ ] Disable JS in DevTools → reload: the full heading, all four layers, and the static motif render.
@@ -106,6 +117,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] design-critique on the PR: does Julia read this and see a platform with a defensible intelligence spine, at the linear/harvey bar?
 
 ## HOME.4B — three pillars (redesign v2)
+
 - [ ] Reads as a structured section: three bordered panels (bg-card + hairline), items as chips, NOT a flat text list.
 - [ ] The Primitives → Domains → Verticals composition is visually clear (monochrome arrow connective between/through the panels).
 - [ ] "Procurement (the wedge)" and "Humanoids (first)" are the teal-signalled chips (outlined); no third teal element; section reads near-monochrome.
@@ -116,6 +128,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] design-critique: does it now sit at the same bar as the hero/wedge?
 
 ## HOME.5 — why now (3 points)
+
 - [ ] Heading + all three points (robotics inflecting · buildable substrate today · forward-deployed) read verbatim from content.md §6; no banned words, no added/removed/reordered point, no invented metric, date, or market-size number.
 - [ ] The section reads as a calm three-point timing thesis, not gradient cards, drop shadows, big fake stats, emoji bullets, or a centered template.
 - [ ] Disable JS in DevTools → reload: the full heading and all three points render.
@@ -128,6 +141,7 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] design-critique on the PR: does an a16z partner read this and see a deliberate "why now," at the linear/harvey bar?
 
 ## HOME.7 — who it's for (verticals strip + buyer/champion framing)
+
 - [ ] Heading, the Now/Next/Then verticals strip (humanoids · defense · logistics, industrial, space), and the buyer/champion line read verbatim from content.md §8; no banned words, no added/removed/reordered vertical, stage, or role.
 - [ ] The section reads as a calm verticals strip + roles line, not a customer-logo wall, gradient persona cards, emoji icons, or a centered template.
 - [ ] Disable JS in DevTools → reload: the full heading, strip, and buyer/champion line render.
@@ -141,9 +155,21 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] design-critique on the PR: does a VP of Ops at a humanoid maker self-identify in one scan, and does an a16z partner read a deliberate beachhead sequence — at the linear/harvey bar?
 
 ## HOME.9 — final CTA band
+
 - [ ] Heading + sub + button labels read verbatim from content.md §10; no banned words.
 - [ ] Heading is an <h2>; the rendered page still has exactly one <h1> (the hero).
 - [ ] The band is the last thing in <main>, after "Who it's for".
 - [ ] hero/nav "Request access" scrolls to this band (#request-access); "Build it with us" → #company; neither 404s.
 - [ ] Disable JS → band renders, buttons clickable.
 - [ ] Both themes: calm, near-monochrome; teal only on the primary button; no CLS at mobile width.
+
+## V2.1 — request-access form
+
+- [ ] Hero email capture submits → success state + founder email + confirmation email (with a valid RESEND_API_KEY, sandbox sender OK).
+- [ ] Closing form: all fields, consent required, validation errors show + focus the first error.
+- [ ] Honeypot: filling the hidden field results in silent success, no email.
+- [ ] Submitting state (Sending…/disabled) and a retryable error state both render; forcing a failure never dead-ends or 500s.
+- [ ] RESEND_API_KEY unset → graceful message, no crash.
+- [ ] Keyboard + screen reader: labelled fields, announced errors, focus management; privacy link present.
+- [ ] Styled in v2 (lime submit, sharp inputs), both the hero capture and closing form.
+- [ ] JS disabled → native POST still submits and returns a result.
