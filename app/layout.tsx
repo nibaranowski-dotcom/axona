@@ -1,19 +1,27 @@
 import type { Metadata } from "next";
-import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
-import { ThemeProvider } from "@/components/theme-provider";
-import { HeaderScroll } from "@/components/header-scroll";
-import { SiteHeader } from "@/components/site-header";
-import { SiteFooter } from "@/components/site-footer";
+import { Archivo, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
-// Self-hosted Geist via the `geist` package (not the Google-fonts loader): exposes the
-// --font-geist-sans / --font-geist-mono CSS variables with display: swap, so there is no
-// FOUT/CLS. Binding the Tailwind theme to these variables is owned by SETUP.3.
+// Axona v2 type system: Archivo (display/body) + JetBrains Mono (labels/codes), self-hosted by
+// next/font at build (no runtime CDN), display: swap → no FOUT/CLS. Bound to --font-sans / --font-mono
+// in globals.css. Light-canonical prototype; no theme toggle.
+const archivo = Archivo({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-archivo",
+  display: "swap",
+});
+const jetbrains = JetBrains_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  variable: "--font-jetbrains",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  // Placeholder only — full per-page metadata, OG, and canonical land in SEO.1.
-  title: "Axona",
-  description: "The operating system for robotics companies.",
+  title: "Axona — The operating system for robotics companies",
+  description:
+    "The AI-native operating system for robotics companies — humans, machines, and agents on one spine. Procurement and per-unit build genealogy first, expanding to run the whole operation.",
 };
 
 export default function RootLayout({
@@ -22,45 +30,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // suppressHydrationWarning: next-themes writes the theme class to <html> before hydration,
-    // which would otherwise trip a server/client mismatch warning. This is the only attribute
-    // it silences — it does not mask other mismatches.
-    <html
-      lang="en"
-      suppressHydrationWarning
-      className={`${GeistSans.variable} ${GeistMono.variable} h-full antialiased`}
-    >
-      {/* relative: anchors HeaderScroll's absolutely-positioned top sentinel. flex column +
-          flex-1 main keeps the footer at the bottom on short pages. */}
-      <body className="relative flex min-h-dvh flex-col">
-        {/* Dark is the default; enableSystem honors prefers-color-scheme when no choice is stored;
-            disableTransitionOnChange prevents a color flash when switching themes. */}
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
+    <html lang="en" className={`${archivo.variable} ${jetbrains.variable} antialiased`}>
+      <body className="bg-background text-foreground">
+        <a
+          href="#main"
+          className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[60] focus:rounded-md focus:border focus:border-line2 focus:bg-white focus:px-4 focus:py-2 focus:font-mono focus:text-xs focus:text-ink focus:outline-none focus:ring-2 focus:ring-lime"
         >
-          {/* Skip link — first focusable element; reveals on focus and jumps to <main>. */}
-          <a
-            href="#main"
-            className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-md focus:border focus:border-border focus:bg-popover focus:px-4 focus:py-2 focus:text-sm focus:font-[510] focus:text-popover-foreground focus:outline-none focus:ring-2 focus:ring-ring"
-          >
-            Skip to content
-          </a>
-
-          {/* Zero-layout scroll sentinel that drives the header hairline (CLS/INP-safe). */}
-          <HeaderScroll />
-
-          <SiteHeader />
-
-          {/* tabIndex=-1 so the skip link can move focus here; flex-1 pushes the footer down. */}
-          <main id="main" tabIndex={-1} className="flex-1 outline-none">
-            {children}
-          </main>
-
-          <SiteFooter />
-        </ThemeProvider>
+          Skip to content
+        </a>
+        {children}
       </body>
     </html>
   );

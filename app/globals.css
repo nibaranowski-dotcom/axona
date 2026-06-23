@@ -1,74 +1,52 @@
-/* Axona design tokens — the executable form of design.md (the single source of truth).
-   Surfaces are near-monochrome; electric teal is the one signal color (--primary + --ring).
-   Dark is designed (not inverted) and is the default theme. Where this file restates a value,
-   design.md wins on any discrepancy. */
+/* Axona design tokens — the executable form of design.md (Axona v2 system).
+   Light-canonical: ink + paper, lime accent, dotted-grid motif, Archivo + JetBrains Mono, soft
+   elevation. Raw v2 palette lives here; shadcn semantic tokens are remapped onto it so existing
+   primitives keep working. Where this file restates a value, design.md wins. */
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
-
-/* LIGHT — authored independently from dark (never derived by inverting). Values from design.md. */
 :root {
-  --background: #FFFFFF;
-  --foreground: #16181B;
-  --card: #FAFAFB;
-  --card-foreground: #16181B;
-  --popover: #FFFFFF;
-  --popover-foreground: #16181B;
-  --muted-foreground: #6B7177;
-  --border: #E6E6E8;
-  --input: #E6E6E8;
-  --primary: hsl(199 89% 48%);
-  --primary-foreground: #FFFFFF;
-  --ring: var(--primary);
+  /* ── Raw Axona v2 palette (from the design project tokens) ───────────────── */
+  --ink: #0a0a0a;
+  --paper: #ffffff;
+  --panel: #f4f3ef;
+  --chip: #f2f2ee;
+  --lime: #c6f24f;
+  --lime-hover: #bce83f;
+  --line: #ededed;
+  --line2: #e7e7e1;
+  --text: #111111;
+  --body: #6b6b63;
+  --dim: #9a9a90;
+  --faint: #8a8a82;
+  --cap: #a7a79d;
+  --logo: #c9c9c9;
+  --ok: #1f9e6f;
+  --okbg: #e9f7f0;
+  --skel: #f0f0ec;
 
-  /* DERIVED — not in design.md. Near-monochrome steps between --card and --border so we never
-     introduce a second accent. Keep these neutral; teal stays exclusive to --primary/--ring. */
-  --secondary: #F1F1F3;
-  --secondary-foreground: #16181B;
-  --muted: #F4F4F5;
-  --accent: #F1F1F3;
-  --accent-foreground: #16181B;
-  /* DERIVED — restrained desaturated red for error/danger only (not from design.md). */
-  --destructive: hsl(0 65% 47%);
-  --destructive-foreground: #FFFFFF;
-
-  /* Radius — design.md: 8px controls · 12px cards · full pills. Base = 12px (cards);
-     controls derive to 8px via --radius-md. */
-  --radius: 0.75rem;
-
-  /* Motion — design.md: 120/180/240ms, cubic-bezier(.2,0,0,1). Functional only. */
-  --ease-out: cubic-bezier(.2, 0, 0, 1);
-  --duration-fast: 120ms;
-  --duration-base: 180ms;
-  --duration-slow: 240ms;
-}
-
-/* DARK — the designed default. True near-black canvas, elevation via surface steps + 1px borders. */
-.dark {
-  --background: #09090B;
-  --foreground: #EDEDEF;
-  --card: #0F0F12;
-  --card-foreground: #EDEDEF;
-  --popover: #16181B;
-  --popover-foreground: #EDEDEF;
-  --muted-foreground: #9A9DA3;
-  --border: #1F2226;
-  --input: #1F2226;
-  --primary: hsl(199 95% 55%);
-  --primary-foreground: #04141A;
-  --ring: var(--primary);
-
-  /* DERIVED — not in design.md. Surface steps above --card, staying near-monochrome. */
-  --secondary: #18181B;
-  --secondary-foreground: #EDEDEF;
-  --muted: #1A1A1E;
-  --accent: #1F2226;
-  --accent-foreground: #EDEDEF;
-  /* DERIVED — restrained desaturated red, lifted for dark contrast (not from design.md). */
-  --destructive: hsl(0 72% 62%);
-  --destructive-foreground: #EDEDEF;
+  /* ── shadcn semantic tokens, remapped to v2 ──────────────────────────────── */
+  --background: var(--paper);
+  --foreground: var(--text);
+  --card: var(--panel);
+  --card-foreground: var(--text);
+  --popover: var(--paper);
+  --popover-foreground: var(--text);
+  --primary: var(--lime);
+  --primary-foreground: var(--ink);
+  --secondary: var(--chip);
+  --secondary-foreground: var(--text);
+  --muted: var(--chip);
+  --muted-foreground: var(--body);
+  --accent: var(--chip);
+  --accent-foreground: var(--text);
+  --destructive: #b42318;
+  --destructive-foreground: #ffffff;
+  --border: var(--line);
+  --input: var(--line2);
+  --ring: var(--lime);
+  --radius: 0.5rem;
 }
 
 @theme inline {
@@ -92,49 +70,53 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* v2-named tokens → utilities (bg-ink, bg-lime, bg-panel, text-body, border-line2, …) */
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-panel: var(--panel);
+  --color-chip: var(--chip);
+  --color-lime: var(--lime);
+  --color-lime-hover: var(--lime-hover);
+  --color-line: var(--line);
+  --color-line2: var(--line2);
+  --color-body: var(--body);
+  --color-dim: var(--dim);
+  --color-faint: var(--faint);
+  --color-cap: var(--cap);
+  --color-logo: var(--logo);
+  --color-ok: var(--ok);
+  --color-okbg: var(--okbg);
+  --color-skel: var(--skel);
 
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 4px);
-  --radius-sm: calc(var(--radius) - 6px);
-  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-archivo);
+  --font-mono: var(--font-jetbrains);
+
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --radius-xl: 14px;
 }
 
-/* Axon-signal motif (components/axon-signal.tsx): one teal pulse travels the trunk path by
-   animating the lit dash's offset. pathLength is normalized to 100, so the lit segment moves a
-   full traversal each loop. Slow (~5.5s) and eased per design.md — signal, not screensaver.
-   transform/opacity-free, GPU-cheap, zero JS. Gated by reduced-motion below: when killed, the
-   stroke-dashoffset falls to its declared value in the SVG, leaving the pulse at rest mid-path. */
-@keyframes axon-pulse {
-  from {
-    stroke-dashoffset: 100;
+@layer base {
+  body {
+    @apply bg-background text-foreground font-sans;
   }
-  to {
-    stroke-dashoffset: 0;
+  ::selection {
+    background: var(--lime);
+    color: var(--ink);
   }
 }
-.axon-pulse {
-  animation: axon-pulse 5500ms var(--ease-out) infinite;
+
+/* Dotted-grid motif — the v2 signature texture behind panels/bands. */
+.dotgrid {
+  background-image: radial-gradient(#d9d8d2 1.1px, transparent 1.1px);
+  background-size: 18px 18px;
 }
 
-/* Reduced-motion: kill animation/transition; interactivity (e.g. the theme toggle) still works.
-   The axon pulse stops here and rests at its declared stroke-dashoffset (signal at rest). */
+/* Reduced motion: kill animation/transition; interactivity still works. */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
     transition: none !important;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
   }
 }
