@@ -7,20 +7,22 @@ The marketing site for Axona. This repo is set up as a **stage** for two operato
 - **Claude Code** (terminal) — implements each PRD, following `CLAUDE.md` + `design.md`.
 
 ## The operating loop
+
 1. **Pick a story** from `specs/backlog.md`.
 2. **Generate the PRD:** give Joe the row — `CPRD "<row>"` — he emits a full PRD (no preamble).
    Save it to `specs/<STORY-ID>.md`.
-3. **Build:** in the terminal, tell Claude Code: *"Implement `specs/<STORY-ID>.md`, follow
-   CLAUDE.md and design.md."* For non-trivial manual sessions, start in Plan Mode, approve the plan,
+3. **Build:** in the terminal, tell Claude Code: _"Implement `specs/<STORY-ID>.md`, follow
+   CLAUDE.md and design.md."_ For non-trivial manual sessions, start in Plan Mode, approve the plan,
    then auto-accept edits. The verify script + tsc are mandatory before "done."
 4. **Gate:** run accessibility-review + design-critique before merge. Verify script passes,
    `tsc --noEmit` clean, manual checks in `docs/manual-checks.md` done.
 5. **Ship:** land work on an `auto/<id>` (or `chore/…`) branch → open a PR against `main`. **Merge
    from the terminal with `gh pr merge <n> --merge --delete-branch` — never via the GitHub UI.**
    `main` is protected (PR required; direct push blocked), so merging via `gh` is the project norm
-   and keeps the merged branch cleaned up. Vercel deploys from `main`. Move to the next story.
+   and keeps the merged branch cleaned up. Railway auto-deploys from `main`. Move to the next story.
 
 ## Autonomous build loop (SETUP.5)
+
 The operating loop above can run unattended for **mechanical** stories. `scripts/build-loop.mjs`
 is a sequential orchestrator: it parses the backlog, picks the next eligible `todo`, invokes the
 planner (Joe) to write the PRD, invokes the **Builder** subagent to implement it, runs the gate,
@@ -34,7 +36,7 @@ node scripts/build-loop.mjs --story SETUP.3  # force a specific story
 node scripts/build-loop.mjs                   # loop until no eligible stories remain
 ```
 
-**Roles.** The runner is the *only* writer of backlog status and git history. The Builder
+**Roles.** The runner is the _only_ writer of backlog status and git history. The Builder
 (`.claude/agents/builder.md`) only implements and self-gates, reporting `GATE: PASS` / `GATE: FAIL`
 — it never commits or edits the backlog. Two writers would corrupt state.
 
@@ -83,6 +85,7 @@ to plan for free, and `--once` to trial cost before running the full loop. The g
 SETUP.2 (package.json/pnpm); until then `--dry-run` still works for planning.
 
 ## How to run Joe — two options
+
 **A. In the terminal with Claude Code (recommended for this build).** Claude Code auto-discovers
 agents in `.claude/agents/`. Invoke Joe to author a CPRD, then have Claude Code implement it. This
 matches the "Joe instructs Claude Code to completion" workflow.
@@ -94,12 +97,14 @@ terminal. Either way Joe stays consistent because the intake is pre-filled and h
 repo's `CLAUDE.md`/`design.md` via the precedence rule.
 
 ## Before you scaffold code — run the "verify latest" pass
+
 This brief was written **June 2026**. Before building, confirm against live sources and update
 `CLAUDE.md` if anything changed: current **Next.js** major, **shadcn** skills/registry MCP,
 current **model names** (docs.claude.com), current **WCAG** version (was 2.2), and Core Web Vitals
 guidance. Newer official guidance wins. Summarize what changed in one line, then build.
 
 ## Map
+
 ```
 CLAUDE.md                  project brief + stack + design DNA + never/always + DoD
 design.md                  token system (electric teal) — single source of truth
@@ -116,6 +121,7 @@ specs/backlog.md           epics + stories in Joe's CPRD trigger format
 docs/manual-checks.md      browser checks Joe appends to per story
 ```
 
-## Source of truth for the *story* (not the code)
+## Source of truth for the _story_ (not the code)
+
 Positioning, ICP, competition, team, and the evidence rules live in the parent project:
 `../memory/` and `../CLAUDE.md`. Do not invent traction — reconcile every claim to those files.
