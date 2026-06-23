@@ -1,51 +1,54 @@
-# design.md — Axona Website Design System (single source of truth)
+# design.md — Axona Website Design System · **v2** (redesign, supersedes v1)
 
-This file is authoritative for tokens. `CLAUDE.md` and `.claude/agents/joe.md` defer to it. Put
-these in code as CSS variables / Tailwind theme — **never hardcode hex in components**. Confirm
-`prefers-color-scheme` support from day one. Aligned with Joe's Design System Defaults so the two
-never drift (accent = electric teal, font = Geist).
+Authoritative token source for the Axona v2 direction (ported from the "Axona v2" design project,
+`Homepage.dc.html` + its tokens). **Replaces the prior dark / electric-teal / Geist system** and the
+Blueprint experiment. Where this file and any skill (e.g. frontend-design) differ, **this file wins**.
+
+## What changed (one line)
+Dark→**light**, teal→**lime `#c6f24f`**, Geist→**Archivo + JetBrains Mono**, near-monochrome→light
+paper with a **dotted-grid motif** and **soft elevation** (subtle shadows are allowed in v2, unlike
+the flat Blueprint). Dark mode deferred (light-canonical; never auto-invert).
 
 ## Seven principles
-1. **Restraint over decoration.** One accent used as signal (status, focus, primary action), never as paint. Near-monochrome surfaces.
-2. **Typography is the interface.** Hierarchy from weight + size, not color or boxes. Geist variable, intentional weights, tight tracking on headings.
-3. **Density with air.** High information density on a consistent 4px rhythm with generous line-height.
-4. **Dark mode is designed, not inverted.** True near-black canvas, layered elevation via surface steps + 1px hairline borders, not heavy shadows.
-5. **Motion is functional.** 120–240ms, custom easing; transitions clarify state. No decorative bounce. Honor `prefers-reduced-motion`.
-6. **Make the complex feel effortless.** Remove friction; keyboard-friendly; command palette where it fits.
-7. **Design with intention.** Every element deliberate. Where trust matters (agent actions), show the reasoning — citations, sources, a visible paper trail.
+1. **Technical-but-warm.** Archivo display + JetBrains Mono labels; reads like a precise product, not a brochure.
+2. **One accent: lime `#c6f24f`.** The single brand signal — CTA buttons (lime on ink text), highlight underline, status/"THE MOAT"/"MVP" tags, the in-build genealogy chart. Never floods a viewport.
+3. **Light paper field.** `#fff` canvas, `#f4f3ef` panels, `#0a0a0a` ink for the announce bar + footer + primary text on lime.
+4. **The dotted grid is the motif.** A `radial-gradient` dot grid (18px) behind the hero panel, verticals, and closing CTA — the v2 signature texture. Don't add competing motifs.
+5. **Type does the work.** Archivo 600–700 display, fluid clamps, tight tracking (−0.03 to −0.045em on big headings); JetBrains Mono UPPERCASE labels/codes/counters.
+6. **Soft elevation, rounded forms.** Subtle shadows on floating mock cards; rounded corners (7–16px) on cards/panels; pills for tabs/tags. Depth is gentle, not heavy.
+7. **Directional prototype now; honest at launch.** This build evaluates the look — fictional sample traction (a parts counter, logo wall, agent stats, testimonials/portraits, "40hrs") is allowed and must read as a realistic mockup. **Hard line: no real company or real person named** (v2's samples are fictional, so fine). Track every fabricated item in `docs/pre-launch-swap.md` and replace/permission before launch.
 
-## Tokens
+## Tokens (from the v2 design project)
+| Token | Value | Use |
+|---|---|---|
+| `--ink` | `#0a0a0a` | Announce bar, footer, primary text on lime, marks |
+| `--paper` | `#ffffff` | Default surface |
+| `--panel` | `#f4f3ef` | Panels / cards / dotgrid bands |
+| `--chip` | `#f2f2ee` | Mono chips (counters, stat values) |
+| **`--lime`** | **`#c6f24f`** (hover `#bce83f`) | **The one accent** |
+| `--text` / `--body` / `--dim` | `#111` / `#6b6b63` / `#9a9a90` | Heading / body / secondary text |
+| `--line` / `--line2` | `#ededed` / `#e7e7e1` | Hairline borders |
+| `--ok` / `--okbg` | `#1f9e6f` / `#e9f7f0` | "Auto-applied" / approved status |
+| Font (sans) | **Archivo** 400–700 | Display + body |
+| Font (mono) | **JetBrains Mono** 400/500 | Labels, codes, counters — UPPERCASE, `.06–.08em` |
+| Max width | `1180px`, 28px gutters | `.wrap` |
+| Dotgrid | `radial-gradient(#d9d8d2 1.1px, transparent 1.1px)` @ 18px | The motif |
+| Motion | 0.15s ease on opacity/background/border; honor `prefers-reduced-motion` | — |
 
-| Token | Dark | Light | Notes |
-|---|---|---|---|
-| Font (body) | Geist Variable | Geist Variable | One family. Geist Mono for code / field-keys / part numbers. |
-| Optional editorial serif | — | — | A quality serif allowed for large editorial headings only. |
-| Type scale (px) | 12 · 13 · 14 · 16 · 20 · 24 · 32 · 48 | same | Body 14–16. Headings tracking −0.01 to −0.02em. |
-| Weights | 400 · 510 · 590 · 680 | same | Hierarchy via weight, Linear-style. |
-| Spacing base | 4px grid (4·8·12·16·24·32·48·64) | same | Everything snaps to it. |
-| Radius | 8 controls · 12 cards · full pills | same | Consistent, restrained. |
-| Canvas (`--background`) | `#09090B` | `#FFFFFF` | Dark = near-black, never pure black. |
-| Surface / elevated (`--card` / `--popover`) | `#0F0F12` / `#16181B` | `#FAFAFB` / `#FFFFFF` | Elevation via surface steps, not shadow. |
-| Border hairline (`--border`) | `#1F2226` | `#E6E6E8` | 1px. Borders do the work shadows would. |
-| Text / muted (`--foreground` / `--muted-foreground`) | `#EDEDEF` / `#9A9DA3` | `#16181B` / `#6B7177` | Maintain ≥ 4.5:1 on body. |
-| **Accent (`--primary`)** | electric teal `hsl(199 95% 55%)` | `hsl(199 89% 48%)` | **The one signal color.** CTAs, focus rings, active state, the hero signal motif. Never as fill paint. |
-| Accent foreground | `#04141A` | `#FFFFFF` | Readable text on the teal. |
-| Motion | 120 / 180 / 240ms · `cubic-bezier(.2,0,0,1)` | same | Spring for overlays; reduced-motion fallback. |
+Self-host both fonts via `next/font`, `display: swap`.
 
-## Usage rules (enforced in `.claude/rules/design.md`)
-- Always use semantic tokens (`bg-background`, `text-foreground`, `text-muted-foreground`,
-  `border-border`, `bg-primary`) — never raw Tailwind color utilities, never inline hex.
-- The teal accent appears at most once or twice per viewport. If a screen looks "teal," it's wrong.
-- Dark is the default theme; light is fully designed, not auto-inverted.
+## Positioning (the spine — non-negotiable)
+**"Operating system,"** never "ERP," as the primary descriptor. Lead with **humans + machines +
+agents**; the wedge is **procurement + per-unit build genealogy**; keep **primitives → domains →
+verticals** and **the moat** (intelligence & agent spine on proprietary data). Reconciled from the
+design copy (which said "ERP") per the handoff PRD.
 
-## Motif (Axona = *axon*, the nerve fiber that carries signal)
-A single restrained "signal" idea: a thin teal line/pulse traveling a near-monochrome circuit or
-node graph — used once in the hero and echoed subtly (focus rings, the active step in flows).
-Never literal robots, never stock AI imagery, never particle-soup backgrounds.
+## Anti-slop (v2)
+- One accent (lime). If a screen reads "all lime," pull back — lime is signal, the field is ink-on-paper.
+- One sans (Archivo) + one mono (JetBrains). No third typeface.
+- The dotted grid is the one texture; soft shadows only on floating cards. No heavy shadow stacks, no gradients-as-paint (the two dark mock gradients are deliberate, contained device art).
+- Prototype mode: fictional sample traction allowed, tracked on the pre-launch-swap list; never a real named company/person.
 
-## What to steal from each benchmark
-Linear: near-black canvas, one accent, dense Geist type, buttery 150–250ms transitions.
-Harvey: enterprise trust — visible citations/paper-trail, "complex made effortless."
-Hebbia: the grid/matrix paradigm — show dense repetitive work as a spreadsheet, not a chat bubble.
-Sana: calm content-first knowledge/agent surfaces. Legora: refined dense tables that still feel light.
-DevRev: unified workspace + command palette. v0/V7: production-grade component craft.
+## Benchmark
+Same craft bar (Linear / Harvey / Ramp-class marketing), in a **light, lime-accented, dotted-grid**
+idiom. The test is unchanged: would this sit next to linear.app / harvey.ai?
