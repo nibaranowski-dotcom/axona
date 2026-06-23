@@ -18,10 +18,25 @@ const jetbrains = JetBrains_Mono({
   display: "swap",
 });
 
+// Canonical site origin — Railway serves axonahq.com (auto-deploys from main). Set
+// NEXT_PUBLIC_SITE_URL in the deploy env; falls back to the production domain.
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://axonahq.com";
+const title = "Axona — The operating system for robotics companies";
+const description =
+  "The AI-native operating system for robotics companies — humans, machines, and agents on one spine. Procurement and per-unit build genealogy first, expanding to run the whole operation.";
+
 export const metadata: Metadata = {
-  title: "Axona — The operating system for robotics companies",
-  description:
-    "The AI-native operating system for robotics companies — humans, machines, and agents on one spine. Procurement and per-unit build genealogy first, expanding to run the whole operation.",
+  metadataBase: new URL(siteUrl),
+  title,
+  description,
+  alternates: { canonical: "/" },
+  openGraph: {
+    title,
+    description,
+    url: siteUrl,
+    siteName: "Axona",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
@@ -30,7 +45,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${archivo.variable} ${jetbrains.variable} antialiased`}>
+    <html
+      lang="en"
+      className={`${archivo.variable} ${jetbrains.variable} antialiased`}
+    >
       <body className="bg-background text-foreground">
         <a
           href="#main"
