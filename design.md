@@ -1,51 +1,80 @@
-# design.md — Axona Website Design System (single source of truth)
+# design.md — Axona Website Design System · **Blueprint** (redesign, supersedes v1)
 
-This file is authoritative for tokens. `CLAUDE.md` and `.claude/agents/joe.md` defer to it. Put
-these in code as CSS variables / Tailwind theme — **never hardcode hex in components**. Confirm
-`prefers-color-scheme` support from day one. Aligned with Joe's Design System Defaults so the two
-never drift (accent = electric teal, font = Geist).
+Authoritative token source. **This replaces the prior dark / electric-teal / Geist system** with the
+"Blueprint" direction from the design handoff (`design_handoff_axona_landing/`, Option B). Where this
+file and any skill (e.g. frontend-design) differ, **this file wins**. Ported from the handoff's
+`assets/base.css` + README, reconciled with Axona's content-integrity rules.
+
+## What changed vs v1 (one-line)
+Dark→**light**, electric-teal→**signature orange**, Geist→**Hanken Grotesk + JetBrains Mono**,
+restraint-only→restraint **plus** three deliberate devices (engineering grid, highlighter text, mono
+spec-labels). Dark mode is **deferred** (Blueprint is light-canonical; keep the toggle infra, design
+a dark Blueprint later — never auto-invert).
 
 ## Seven principles
-1. **Restraint over decoration.** One accent used as signal (status, focus, primary action), never as paint. Near-monochrome surfaces.
-2. **Typography is the interface.** Hierarchy from weight + size, not color or boxes. Geist variable, intentional weights, tight tracking on headings.
-3. **Density with air.** High information density on a consistent 4px rhythm with generous line-height.
-4. **Dark mode is designed, not inverted.** True near-black canvas, layered elevation via surface steps + 1px hairline borders, not heavy shadows.
-5. **Motion is functional.** 120–240ms, custom easing; transitions clarify state. No decorative bounce. Honor `prefers-reduced-motion`.
-6. **Make the complex feel effortless.** Remove friction; keyboard-friendly; command palette where it fits.
-7. **Design with intention.** Every element deliberate. Where trust matters (agent actions), show the reasoning — citations, sources, a visible paper trail.
+1. **Technical-editorial, not decorative.** The page should read like a precise spec sheet — mono labels, numbered rows, hairline grids — not a marketing brochure.
+2. **One accent: signature orange.** `#fa3c00` is the single brand signal (logo, highlights, primary CTA, hover, the kicker tick). Used deliberately; never floods a viewport.
+3. **Flat. Depth from hairlines + color blocks, never shadows.** No drop shadows anywhere. Structure comes from 1px lines, the grid, and solid blocks.
+4. **Sharp by default.** Rectangles — no radius on cards/blocks/placeholders. Pills only for buttons (`999px`). Logo mark is a square.
+5. **Type does the work.** Heavy geometric sans (Hanken Grotesk 800 display) + mono technical labels (JetBrains Mono, uppercase, tracked). Big fluid headlines; calm body.
+6. **The highlighter is the one expressive move.** A solid color block behind a key phrase (`.hl`) — orange for the signal phrase, pastels used sparingly. This is the signature; don't add others.
+7. **Directional prototype now; honest at launch.** This build's job is to evaluate the look — illustrative stats, a logo wall, and module copy (per the handoff) are fine here and should read as a realistic mockup. **Before it goes live to real buyers**, replace fabricated metrics and swap real-company logos for permissioned or generic ones (real named-customer logos are the one element that can actually bite — trademark + implied endorsement). Track these in a "pre-launch swap" list.
 
-## Tokens
+## Tokens (from handoff `base.css`)
+| Token | Value | Use |
+|---|---|---|
+| `--ink` | `#0c0c0d` | Primary text, dark blocks, ink buttons |
+| `--paper` | `#ffffff` | Default surface |
+| `--paper-2` | `#f7f6f2` | Off-white panels / ghost buttons |
+| `--bg` | `#fbfbf9` | Page background (Blueprint) |
+| **`--orange`** | **`#fa3c00`** | **The one accent** — logo, highlight, CTA, hover |
+| `--orange-ink` | `#c52e00` | Orange text on light / hover |
+| `--line` | `#d7d7d2` | Hairline borders (neutral) |
+| `--line-blue` | `#c4cae6` | Hairline borders on grid/placeholder fields |
+| Pastel stat blocks | `--pink #fbd4dc` · `--lilac #e0e2ee` · `--sky #cfeaf8` · `--butter #f4f2cf` | Optional stat-block fills / highlighter variants — sparingly |
+| Font (sans) | **Hanken Grotesk** (400–900) | Display 800 (`-0.02em`, `line-height .98`); body 400–600, 18px/1.5 |
+| Font (mono) | **JetBrains Mono** (400/500/700) | Labels/kickers/codes — UPPERCASE, `letter-spacing .12em`, 11–13px |
+| Max width | `1320px`, 32px gutters | `.wrap` |
+| Section padding | 100–120px desktop | Generous vertical rhythm |
+| Nav height | 76px, bottom hairline | Sticky |
+| Radius | **0** (sharp) everywhere; **999px** pills (buttons only); logo 34×34 square | — |
+| Shadows | **none** | Depth via hairlines + blocks |
+| Motion | 0.15–0.2s ease on transform/background/border; `translateY(-1px)` button hover | Honor `prefers-reduced-motion` |
 
-| Token | Dark | Light | Notes |
-|---|---|---|---|
-| Font (body) | Geist Variable | Geist Variable | One family. Geist Mono for code / field-keys / part numbers. |
-| Optional editorial serif | — | — | A quality serif allowed for large editorial headings only. |
-| Type scale (px) | 12 · 13 · 14 · 16 · 20 · 24 · 32 · 48 | same | Body 14–16. Headings tracking −0.01 to −0.02em. |
-| Weights | 400 · 510 · 590 · 680 | same | Hierarchy via weight, Linear-style. |
-| Spacing base | 4px grid (4·8·12·16·24·32·48·64) | same | Everything snaps to it. |
-| Radius | 8 controls · 12 cards · full pills | same | Consistent, restrained. |
-| Canvas (`--background`) | `#09090B` | `#FFFFFF` | Dark = near-black, never pure black. |
-| Surface / elevated (`--card` / `--popover`) | `#0F0F12` / `#16181B` | `#FAFAFB` / `#FFFFFF` | Elevation via surface steps, not shadow. |
-| Border hairline (`--border`) | `#1F2226` | `#E6E6E8` | 1px. Borders do the work shadows would. |
-| Text / muted (`--foreground` / `--muted-foreground`) | `#EDEDEF` / `#9A9DA3` | `#16181B` / `#6B7177` | Maintain ≥ 4.5:1 on body. |
-| **Accent (`--primary`)** | electric teal `hsl(199 95% 55%)` | `hsl(199 89% 48%)` | **The one signal color.** CTAs, focus rings, active state, the hero signal motif. Never as fill paint. |
-| Accent foreground | `#04141A` | `#FFFFFF` | Readable text on the teal. |
-| Motion | 120 / 180 / 240ms · `cubic-bezier(.2,0,0,1)` | same | Spring for overlays; reduced-motion fallback. |
+Self-host both fonts via `next/font` (no Google CDN in prod), `display: swap`.
 
-## Usage rules (enforced in `.claude/rules/design.md`)
-- Always use semantic tokens (`bg-background`, `text-foreground`, `text-muted-foreground`,
-  `border-border`, `bg-primary`) — never raw Tailwind color utilities, never inline hex.
-- The teal accent appears at most once or twice per viewport. If a screen looks "teal," it's wrong.
-- Dark is the default theme; light is fully designed, not auto-inverted.
+## Heading scale (fluid)
+Hero H1 `clamp(46px, 6vw, 90px)` (Blueprint); section H2 `clamp(34px, 4.6vw, 58px)`; card H3 21–26px;
+body 18px/1.5. `text-wrap: balance` on display headings. When a highlighter span sits on its own line,
+loosen `line-height` to ~1.12 and add `margin-top: .08em` so the block clears the line above.
 
-## Motif (Axona = *axon*, the nerve fiber that carries signal)
-A single restrained "signal" idea: a thin teal line/pulse traveling a near-monochrome circuit or
-node graph — used once in the hero and echoed subtly (focus rings, the active step in flows).
-Never literal robots, never stock AI imagery, never particle-soup backgrounds.
+## Signature devices (the only allowed "expressive" elements)
+1. **Highlighter** `.hl` — inline solid-color block behind text, `padding: .04em .18em`, `box-decoration-break: clone`. Orange = the signal phrase; pastels (butter/sky/lilac/pink) only occasionally.
+2. **Mono kicker** — uppercase JetBrains Mono label preceded by a 9px solid-orange square tick.
+3. **Engineering grid** — 96×96px CSS line grid (`--line`) behind the hero and about bands.
+4. **Spec rows / mono codes** — numbered module rows (`M.01`…), `IND.01` corner tags — the "spec sheet" read.
+5. **Pill buttons** — `.btn--ink` / `.btn--orange` / `.btn--outline` (1px ink) / `.btn--ghost`, each with a `›` chevron; hover lifts 1px.
+6. **Striped placeholders** — diagonal-hairline boxes captioned in mono, standing in for dithered/halftone robotics renders (real art replaces them; never ship a broken/placeholder image in prod — gate or use a designed empty state).
 
-## What to steal from each benchmark
-Linear: near-black canvas, one accent, dense Geist type, buttery 150–250ms transitions.
-Harvey: enterprise trust — visible citations/paper-trail, "complex made effortless."
-Hebbia: the grid/matrix paradigm — show dense repetitive work as a spreadsheet, not a chat bubble.
-Sana: calm content-first knowledge/agent surfaces. Legora: refined dense tables that still feel light.
-DevRev: unified workspace + command palette. v0/V7: production-grade component craft.
+## Anti-slop (updated for Blueprint)
+- One accent (orange). If a screen reads "all orange," pull back — orange is signal, the field is ink-on-paper.
+- No shadows, no rounded cards, no gradients. Flat, sharp, hairline-structured.
+- One sans family (Hanken Grotesk) + one mono (JetBrains Mono). No third typeface.
+- Highlighter is the only expressive flourish — don't stack devices.
+- Prototype mode: illustrative stats/logos/module copy are allowed for this directional build; flag them on a "pre-launch swap" list and replace before going live (esp. real-company logos).
+
+## Brand rename
+Handoff files say **"Forge"** (wordmark, `F` mark, footer). Real brand is **Axona** → global rename
+`Forge → Axona`, logo mark `F → A` (square, orange).
+
+## Benchmarks
+Same craft bar (Linear / Harvey), now in a **light, technical-editorial** idiom: Stripe-docs precision,
+Linear's restraint, the handoff's spec-sheet structure. The test is unchanged: *would this sit next to
+linear.app / harvey.ai?* — just in the Blueprint language.
+
+## Content (hybrid: thesis spine + ERP concreteness) + prototype traction
+The hybrid content keeps Axona's thesis (AI-native OS, agentic procurement wedge, humans + machines +
+agents, the compounding moat) as the **spine**, expressed through Blueprint's concrete module / industry
+structure. **Prototype mode:** illustrative stats strip, logo wall, and module copy (per the handoff)
+are built now to evaluate the look — kept on a `docs/pre-launch-swap.md` list and replaced/permissioned
+before launch. This is a "what could it look like" build, not the production-final copy pass.

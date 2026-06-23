@@ -1,74 +1,51 @@
-/* Axona design tokens — the executable form of design.md (the single source of truth).
-   Surfaces are near-monochrome; electric teal is the one signal color (--primary + --ring).
-   Dark is designed (not inverted) and is the default theme. Where this file restates a value,
-   design.md wins on any discrepancy. */
+/* Axona design tokens — the executable form of design.md (Blueprint system).
+   Light-canonical: ink on paper, one signature orange, Hanken Grotesk + JetBrains Mono, flat & sharp
+   (no shadows, radius 0; pills only on buttons). Dark mode is deferred — do NOT auto-invert.
+   Raw Blueprint palette lives here; shadcn semantic tokens are remapped onto it so existing
+   primitives keep working. Where this file restates a value, design.md wins. */
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "shadcn/tailwind.css";
 
-@custom-variant dark (&:is(.dark *));
-
-/* LIGHT — authored independently from dark (never derived by inverting). Values from design.md. */
 :root {
-  --background: #FFFFFF;
-  --foreground: #16181B;
-  --card: #FAFAFB;
-  --card-foreground: #16181B;
-  --popover: #FFFFFF;
-  --popover-foreground: #16181B;
-  --muted-foreground: #6B7177;
-  --border: #E6E6E8;
-  --input: #E6E6E8;
-  --primary: hsl(199 89% 48%);
-  --primary-foreground: #FFFFFF;
-  --ring: var(--primary);
+  /* ── Raw Blueprint palette (from the handoff base.css) ───────────────────── */
+  --ink: #0c0c0d;
+  --paper: #ffffff;
+  --paper-2: #f7f6f2;
+  --bg: #fbfbf9;
+  --orange: #fa3c00; /* the one accent */
+  --orange-ink: #c52e00;
+  --line: #d7d7d2;
+  --line-blue: #c4cae6;
+  --field: #d9deef;
+  --field-2: #e6e9f5;
+  --pink: #fbd4dc;
+  --lilac: #e0e2ee;
+  --sky: #cfeaf8;
+  --butter: #f4f2cf;
+  --muted-ink: #56596a;
 
-  /* DERIVED — not in design.md. Near-monochrome steps between --card and --border so we never
-     introduce a second accent. Keep these neutral; teal stays exclusive to --primary/--ring. */
-  --secondary: #F1F1F3;
-  --secondary-foreground: #16181B;
-  --muted: #F4F4F5;
-  --accent: #F1F1F3;
-  --accent-foreground: #16181B;
-  /* DERIVED — restrained desaturated red for error/danger only (not from design.md). */
-  --destructive: hsl(0 65% 47%);
-  --destructive-foreground: #FFFFFF;
-
-  /* Radius — design.md: 8px controls · 12px cards · full pills. Base = 12px (cards);
-     controls derive to 8px via --radius-md. */
-  --radius: 0.75rem;
-
-  /* Motion — design.md: 120/180/240ms, cubic-bezier(.2,0,0,1). Functional only. */
-  --ease-out: cubic-bezier(.2, 0, 0, 1);
-  --duration-fast: 120ms;
-  --duration-base: 180ms;
-  --duration-slow: 240ms;
-}
-
-/* DARK — the designed default. True near-black canvas, elevation via surface steps + 1px borders. */
-.dark {
-  --background: #09090B;
-  --foreground: #EDEDEF;
-  --card: #0F0F12;
-  --card-foreground: #EDEDEF;
-  --popover: #16181B;
-  --popover-foreground: #EDEDEF;
-  --muted-foreground: #9A9DA3;
-  --border: #1F2226;
-  --input: #1F2226;
-  --primary: hsl(199 95% 55%);
-  --primary-foreground: #04141A;
-  --ring: var(--primary);
-
-  /* DERIVED — not in design.md. Surface steps above --card, staying near-monochrome. */
-  --secondary: #18181B;
-  --secondary-foreground: #EDEDEF;
-  --muted: #1A1A1E;
-  --accent: #1F2226;
-  --accent-foreground: #EDEDEF;
-  /* DERIVED — restrained desaturated red, lifted for dark contrast (not from design.md). */
-  --destructive: hsl(0 72% 62%);
-  --destructive-foreground: #EDEDEF;
+  /* ── shadcn semantic tokens, remapped to Blueprint ───────────────────────── */
+  --background: var(--bg);
+  --foreground: var(--ink);
+  --card: var(--paper);
+  --card-foreground: var(--ink);
+  --popover: var(--paper);
+  --popover-foreground: var(--ink);
+  --primary: var(--orange);
+  --primary-foreground: #ffffff;
+  --secondary: var(--paper-2);
+  --secondary-foreground: var(--ink);
+  --muted: var(--paper-2);
+  --muted-foreground: var(--muted-ink);
+  --accent: var(--paper-2);
+  --accent-foreground: var(--ink);
+  --destructive: var(--orange-ink);
+  --destructive-foreground: #ffffff;
+  --border: var(--line);
+  --input: var(--line);
+  --ring: var(--orange);
+  --radius: 0rem; /* sharp by default — pills are per-button */
 }
 
 @theme inline {
@@ -92,34 +69,46 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  /* Blueprint-named tokens → utilities (bg-ink, text-orange, border-line, …) */
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-paper-2: var(--paper-2);
+  --color-orange: var(--orange);
+  --color-orange-ink: var(--orange-ink);
+  --color-line: var(--line);
+  --color-line-blue: var(--line-blue);
+  --color-field: var(--field);
+  --color-field-2: var(--field-2);
+  --color-pink: var(--pink);
+  --color-lilac: var(--lilac);
+  --color-sky: var(--sky);
+  --color-butter: var(--butter);
 
-  --radius-lg: var(--radius);
-  --radius-md: calc(var(--radius) - 4px);
-  --radius-sm: calc(var(--radius) - 6px);
-  --radius-xl: calc(var(--radius) + 4px);
+  /* type */
+  --font-sans: var(--font-hanken);
+  --font-mono: var(--font-jetbrains);
+
+  /* radius — flat/sharp Blueprint */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
 }
 
-/* Axon-signal motif (components/axon-signal.tsx): one teal pulse travels the trunk path by
-   animating the lit dash's offset. pathLength is normalized to 100, so the lit segment moves a
-   full traversal each loop. Slow (~5.5s) and eased per design.md — signal, not screensaver.
-   transform/opacity-free, GPU-cheap, zero JS. Gated by reduced-motion below: when killed, the
-   stroke-dashoffset falls to its declared value in the SVG, leaving the pulse at rest mid-path. */
-@keyframes axon-pulse {
-  from {
-    stroke-dashoffset: 100;
+@layer base {
+  * {
+    @apply border-border;
   }
-  to {
-    stroke-dashoffset: 0;
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+  ::selection {
+    background: var(--orange);
+    color: #ffffff;
   }
 }
-.axon-pulse {
-  animation: axon-pulse 5500ms var(--ease-out) infinite;
-}
 
-/* Reduced-motion: kill animation/transition; interactivity (e.g. the theme toggle) still works.
-   The axon pulse stops here and rests at its declared stroke-dashoffset (signal at rest). */
+/* Reduced motion: kill animation/transition; interactivity still works. */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
@@ -127,14 +116,114 @@
   }
 }
 
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
-  }
+/* ===== Blueprint signature primitives (the only expressive devices) ===== */
+
+/* Heavy geometric display + mono technical labels. */
+.display {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 0.98;
+  text-wrap: balance;
 }
+.mono-label {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* Mono kicker — uppercase label with a 9px solid-orange square tick. */
+.kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--orange-ink);
+}
+.kicker::before {
+  content: "";
+  width: 9px;
+  height: 9px;
+  background: var(--orange);
+  display: inline-block;
+}
+
+/* Highlighter — solid color block behind a key phrase (the one flourish). */
+.hl {
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+  padding: 0.04em 0.18em;
+}
+.hl-orange { background: var(--orange); color: #ffffff; }
+.hl-butter { background: var(--butter); }
+.hl-sky { background: var(--sky); }
+.hl-lilac { background: var(--lilac); }
+.hl-pink { background: var(--pink); }
+
+/* 96×96 engineering grid behind the hero / about bands. */
+.blue-grid {
+  background-image:
+    linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 96px 96px;
+}
+
+/* Striped placeholders — stand-ins for dithered robotics renders (swap before launch). */
+.ph {
+  position: relative;
+  background-color: var(--field-2);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 9px,
+    rgba(12, 12, 13, 0.05) 9px 10px
+  );
+  border: 1px solid var(--line-blue);
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.ph > span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #6a6f86;
+  background: var(--paper);
+  padding: 6px 10px;
+  border: 1px solid var(--line-blue);
+}
+.ph-orange {
+  background-color: var(--orange);
+  background-image: repeating-linear-gradient(
+    -45deg,
+    transparent 0 9px,
+    rgba(0, 0, 0, 0.1) 9px 10px
+  );
+  border-color: var(--orange-ink);
+}
+.ph-orange > span { color: #ffffff; background: var(--orange-ink); border-color: transparent; }
+
+/* Pill buttons — the only rounded elements. Hover lifts 1px; visible focus ring. */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 13px 22px;
+  border-radius: 999px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn:focus-visible { outline: 2px solid var(--orange); outline-offset: 2px; }
+.btn-ink { background: var(--ink); color: #ffffff; }
+.btn-orange { background: var(--orange); color: #ffffff; }
+.btn-outline { background: transparent; border-color: var(--ink); color: var(--ink); }
+.btn-ghost { background: var(--paper-2); color: var(--ink); }

@@ -1,38 +1,28 @@
-import { Hero } from "@/components/hero";
-import { Problem } from "@/components/problem";
-import { Wedge } from "@/components/wedge";
-import { HowItWorks } from "@/components/how-it-works";
-import { Pillars } from "@/components/pillars";
-import { WhyNow } from "@/components/why-now";
-import { Thesis } from "@/components/thesis";
-import { WhoItsFor } from "@/components/who-its-for";
-import { FinalCta } from "@/components/final-cta";
+import { BlueprintNav } from "@/components/blueprint/nav";
+import { BlueprintHero } from "@/components/blueprint/hero";
+import { SpecStrip } from "@/components/blueprint/spec-strip";
+import { Platform } from "@/components/blueprint/platform";
+import { Industries } from "@/components/blueprint/industries";
+import { AboutBand } from "@/components/blueprint/about";
+import { BlueprintFooter } from "@/components/blueprint/footer";
 
-// Homepage. The app shell (header, footer, theme toggle, skip link) wraps this from
-// app/layout.tsx (SETUP.4); this file owns the page body and the single <h1> (in <Hero />).
-// Order tells the story top-down: category (hero) → pain (problem) → proof (wedge) → thesis (why
-// we win). Sections land in HOME.* stories below the hero: HOME.2 = <Problem /> (#problem),
-// HOME.3 = <Wedge /> (#product), HOME.4 = <HowItWorks /> (#how-it-works), HOME.4B = <Pillars />
-// (#pillars), HOME.5 = <WhyNow /> (#why-now), HOME.6 = <Thesis /> (#thesis). IA order: hero →
-// problem → wedge → how-it-works → pillars → why-now → thesis. The pillars (the Primitives ×
-// Domains × Verticals model) render after the four implementation layers; why-now (the timing
-// thesis) sits between the pillars and the thesis (content.md orders §6 between §5 and §7); the
-// thesis stays last among the argument sections; who-it's-for (HOME.7) follows it (the audience
-// map — verticals sequence + buyer/champion), per content.md's §7 → §8 order. HOME.9 = <FinalCta />
-// (#request-access), the closing ask, renders LAST — the last child of the page fragment, which the
-// shell (SETUP.4) renders inside <main>. HOME.8 (company, #company) inserts before it later.
+// Homepage — Blueprint redesign prototype (redesign/blueprint, design.md Blueprint system).
+// This file owns the full page chrome: sticky nav (header), the section spine in <main> (the page's
+// single <h1> lives in <BlueprintHero />), and the orange footer. Order: hero → spec/customers →
+// platform (modules) → industries → about/thesis → footer. The v1 HOME.* components are unused on
+// this branch (kept for reference / diffing; not imported).
 export default function Home() {
   return (
     <>
-      <Hero />
-      <Problem />
-      <Wedge />
-      <HowItWorks />
-      <Pillars />
-      <WhyNow />
-      <Thesis />
-      <WhoItsFor />
-      <FinalCta />
+      <BlueprintNav />
+      <main id="main">
+        <BlueprintHero />
+        <SpecStrip />
+        <Platform />
+        <Industries />
+        <AboutBand />
+      </main>
+      <BlueprintFooter />
     </>
   );
 }
