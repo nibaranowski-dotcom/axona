@@ -32,6 +32,7 @@ yarn-error.log*
 
 # env files (can opt-in for committing if needed)
 .env*
+!.env.example
 
 # Claude Code local settings / secrets (ignore travels with the repo, not just the global ignore)
 .claude/settings.local.json
