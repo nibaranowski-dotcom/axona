@@ -144,7 +144,6 @@ export interface Layer {
   tag: string;
   title: string;
   body: string;
-  moat?: boolean;
 }
 export const architecture = {
   eyebrow: "THE ARCHITECTURE",
@@ -166,7 +165,6 @@ export const architecture = {
       tag: "L2 · INTELLIGENCE & AGENT SPINE",
       title: "Intelligence & Agent Spine",
       body: "Specialized models, long-term memory, and per-unit build genealogy — orchestrating humans, machines, and agents.",
-      moat: true,
     },
     {
       tag: "L1 · DATA & CONTEXT",
