@@ -37,7 +37,7 @@ export const hero = {
   eyebrow: "PARTS UNDER MANAGEMENT BY AXONA:",
   counter: "7,491,284 parts", // FICTIONAL illustrative counter (static) — see pre-launch-swap.md
   h1: "Build robots. Not spreadsheets.",
-  sub: "Procurement, production, supply chain, and field service — humans, machines, and agents on one AI-native operating system for robotics companies.",
+  sub: "Procurement, manufacturing, quality, fulfillment, field service, finance — humans, machines, and agents on one AI-native operating system for robotics.",
   emailPlaceholder: "What's your work email?",
   cta: "Book a demo",
 };
@@ -82,56 +82,94 @@ export const join = {
   },
 };
 
-export interface Tab {
+// Module map (the platform launcher). `agents` counts are FICTIONAL sample data — see pre-launch-swap.md.
+export interface Module {
+  name: string;
+  desc: string;
+  agents?: string;
+}
+export interface ModuleGroup {
+  label: string;
+  modules: Module[];
+}
+export interface ExpandStep {
+  idx: string;
   label: string;
   active?: boolean;
-}
-export interface FeatureCard {
-  title: string;
-  body: string;
-  cap: string;
+  arrow?: boolean;
 }
 export const platform = {
   h2: "One operating system. Every function on the floor.",
-  sub: "Domains that share one spine — and infinite agents that work 24/7.",
-  tabs: [
-    { label: "Procurement", active: true },
-    { label: "Manufacturing" },
-    { label: "Quality & Test" },
-    { label: "Logistics" },
-    { label: "Field Service" },
-    { label: "R&D" },
-    { label: "IT & Security" },
-  ] as Tab[],
-  cards: [
+  sub: "Every module ships with agents. Workflows orchestrates them across modules. Command Center is the single pane over all of it.",
+  groups: [
     {
-      title: "Procurement",
-      body: "The wedge. Agents source long-lead components, run RFQs, and draft purchase orders from live BOM demand — your buyers approve in one click.",
-      cap: "PO-10482 · DRAFT",
+      label: "CORE",
+      modules: [
+        { name: "Command Center", desc: "Live overview across every module" },
+        { name: "Agents", desc: "Every module's agents in one place" },
+        { name: "Workflows", desc: "Orchestrate agents across modules" },
+        { name: "Projects", desc: "Workspaces, files & matrices" },
+        { name: "Machines", desc: "Plant & equipment register" },
+      ],
     },
     {
-      title: "Manufacturing",
-      body: "Plan builds, route work orders, and keep per-unit build genealogy from the first PCB to the packaged robot.",
-      cap: "WORK ORDER · UNIT #2208",
+      label: "VALUE CHAIN",
+      modules: [
+        {
+          name: "Procurement",
+          desc: "Sourcing, RFQs & POs",
+          agents: "6 agents",
+        },
+        { name: "Manufacturing", desc: "Work orders & build genealogy" },
+        { name: "Inventory", desc: "Parts, spares & RMA" },
+        { name: "Quality", desc: "Inspection, calibration & certs" },
+        {
+          name: "Fulfillment",
+          desc: "Install & commissioning",
+          agents: "3 active",
+        },
+        { name: "Sales & CRM", desc: "CPQ & deliverability" },
+        { name: "Marketing", desc: "Demand & pipeline" },
+      ],
     },
-  ] as FeatureCard[],
-  small: [
     {
-      title: "Quality & Test",
-      body: "Capture test results against every serial. Catch the defect pattern before it ships.",
-      cap: "QA · SERIAL TRACE",
+      label: "ROBOTICS",
+      modules: [
+        {
+          name: "Fleet",
+          desc: "Deployed units & telemetry",
+          agents: "4 agents",
+        },
+        { name: "Field Service", desc: "Dispatch & predictive maintenance" },
+        { name: "Engineering", desc: "CAD, firmware & change orders" },
+        { name: "Autonomy", desc: "Missions, safety & SLAs" },
+      ],
     },
     {
-      title: "Logistics",
-      body: "Multi-site stock, transfers, and inbound tracking on one connected graph.",
-      cap: "INBOUND · SITE-3",
+      label: "BACK OFFICE",
+      modules: [
+        {
+          name: "Finance",
+          desc: "GL, AP/AR & RaaS revenue",
+          agents: "6 agents",
+        },
+        { name: "People", desc: "Workforce & technician certs" },
+        { name: "Security", desc: "Access & device posture" },
+        { name: "Legal", desc: "Contracts & export control" },
+      ],
     },
-    {
-      title: "Field Service",
-      body: "Warranty, parts, firmware, and uptime for every robot in the field.",
-      cap: "FLEET · UPTIME",
-    },
-  ] as FeatureCard[],
+  ] as ModuleGroup[],
+  expand: {
+    eyebrow: "LAND & EXPAND",
+    h3: "Start where it's on fire. Run the whole floor on the same spine.",
+    body: "Land with procurement and per-unit build genealogy. The same system then runs quality, fulfillment, field service, and finance — adding a module is configuration, not a rebuild.",
+    steps: [
+      { idx: "01", label: "Procurement", active: true, arrow: true },
+      { idx: "02", label: "Quality", arrow: true },
+      { idx: "03", label: "Fulfillment", arrow: true },
+      { idx: "04", label: "Finance" },
+    ] as ExpandStep[],
+  },
 };
 
 export const systems = {
@@ -196,7 +234,7 @@ export const verticals = {
   eyebrow: "THE VERTICALS",
   h2: "One engine, proven on humanoids — then carried to every kind of robot company.",
   items: [
-    { name: "Humanoids", idx: "01", tag: "MVP" },
+    { name: "Humanoids", idx: "01", tag: "Coming soon" },
     { name: "Defense", idx: "02", tag: "Coming soon" },
     { name: "Logistics", idx: "03", tag: "Coming soon" },
     { name: "Manufacturing", idx: "04" },
@@ -233,7 +271,9 @@ export interface PolicyRow {
   v: string;
 }
 export const aiLearns = {
+  eyebrow: "A LOOK AT ONE MODULE · PROCUREMENT",
   h2: "AI that learns from your operation. Powered by 1,200 teams that came before you.",
+  subline: "The same propose → approve → audit pattern runs in every module.",
   body: "Axona flags the part that always slips, the vendor that always runs late, and the cost leak hiding in your BOM — before they cost you a build.",
   policyTitle: "Procurement Policy",
   policyBadge: "Auto-applied",
