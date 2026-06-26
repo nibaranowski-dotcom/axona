@@ -21,9 +21,9 @@ const jetbrains = JetBrains_Mono({
 // Canonical site origin — Railway serves axonahq.com (auto-deploys from main). Set
 // NEXT_PUBLIC_SITE_URL in the deploy env; falls back to the production domain.
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://axonahq.com";
-const title = "Axona — The operating system for robotics companies";
+const title = "Axona — The operating system for robotics makers";
 const description =
-  "The AI-native operating system for robotics companies — humans, machines, and agents on one spine. Procurement and per-unit build genealogy first, expanding to run the whole operation.";
+  "An agentic manufacturing co-pilot with a record of every build — per-unit build genealogy and work orders first, then your whole operation. Humans, machines, and agents on one system. Onboarding founding design partners.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

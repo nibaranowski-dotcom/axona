@@ -71,4 +71,4 @@ export type RequestAccessState = {
 export const initialRequestAccessState: RequestAccessState = { ok: false };
 
 export const SUCCESS_MESSAGE =
-  "Thanks — we'll be in touch within a few days. Founders read every request.";
+  "Thanks — request received. We'll be in touch within a few days. Founders read every request.";

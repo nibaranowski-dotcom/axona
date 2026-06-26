@@ -1,15 +1,14 @@
 import { AnnounceBar, SiteNav, SiteFooter } from "@/components/v2/chrome";
 import { Hero } from "@/components/v2/hero";
-import { Join } from "@/components/v2/join";
-import { Platform, Systems } from "@/components/v2/platform";
-import { Architecture, Verticals } from "@/components/v2/architecture";
-import { IntroAgents, KeepFocused, AILearns, Scale, Receipts } from "@/components/v2/agents";
-import { Closing } from "@/components/v2/closing";
+import { Problem } from "@/components/v2/problem";
+import { Wedge } from "@/components/v2/wedge";
+import { Platform, Verticals } from "@/components/v2/platform";
+import { Partner } from "@/components/v2/partner";
+import { FinalCta } from "@/components/v2/closing";
 
-// Homepage — Axona v2 redesign prototype (redesign/axona-v2). Rebuilt from the "Axona v2" design
-// project's Homepage.dc.html in our Next/Tailwind/tokens (the .dc.html is a reference only). The page
-// owns the chrome: announce bar + sticky nav (header), the section spine in <main> (the single <h1>
-// is in <Hero />), and the dark footer. The v1 HOME.* components are unused on this branch.
+// Homepage — Axona PRE-LAUNCH (PRELAUNCH.1). Honest, manufacturing-led, ~6 sections: hero (status
+// chip + sample SN-2208 widget) → problem → what it is (propose→approve→audit) → platform (4 layers)
+// → verticals (coming soon) → founding design partner → final CTA. No fabricated traction.
 export default function Home() {
   return (
     <>
@@ -17,17 +16,12 @@ export default function Home() {
       <SiteNav />
       <main id="main">
         <Hero />
-        <Join />
+        <Problem />
+        <Wedge />
         <Platform />
-        <Systems />
-        <Architecture />
         <Verticals />
-        <IntroAgents />
-        <KeepFocused />
-        <AILearns />
-        <Scale />
-        <Receipts />
-        <Closing />
+        <Partner />
+        <FinalCta />
       </main>
       <SiteFooter />
     </>
