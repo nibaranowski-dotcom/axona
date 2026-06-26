@@ -173,3 +173,15 @@ Joe appends a block per story. Keep newest at the bottom.
 - [ ] Keyboard + screen reader: labelled fields, announced errors, focus management; privacy link present.
 - [ ] Styled in v2 (lime submit, sharp inputs), both the hero capture and closing form.
 - [ ] JS disabled → native POST still submits and returns a result.
+
+## PRELAUNCH.1 — honest pre-launch homepage (content-integrity)
+
+- [ ] Grep clean: no `1,200` / `3.2×` / `7,491,284` / logo wall (NORTHWIND…PILOT) / `40hrs` / `We've got the receipts` / `Lauren` / `CUSTOMER PHOTO` / `Powered by 1,200` anywhere in src/app/content/components.
+- [ ] No customer logos, usage metrics, testimonials, or named/quoted people anywhere on the page.
+- [ ] Sample data appears only inside product mocks and is visibly labeled ("sample data — illustrative" / "SAMPLE DATA").
+- [ ] Team shows only "Founder-led — Nicolas Baranowski · Founder at Axona." (no unconfirmed teammates).
+- [ ] Manufacturing-led: hero subhead + `<meta>`/OG description lead with manufacturing + build genealogy; procurement is an expansion.
+- [ ] Honest status chip visible ("Onboarding our first founding design partners"); announce bar pre-launch.
+- [ ] Dead nav/footer (Docs, Pricing, Careers, Blog) render as muted "coming soon", not links to nothing.
+- [ ] "Request access" submits via the requestAccess server action (success/error states); degrades gracefully if RESEND_API_KEY unset.
+- [ ] v2 tokens intact (paper/panel/ink, single lime, Archivo + JetBrains, dotgrid, hairlines); no emoji; calm, sits next to linear.app/harvey.ai.

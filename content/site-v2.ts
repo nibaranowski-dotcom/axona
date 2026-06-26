@@ -1,164 +1,128 @@
-// content/site-v2.ts — copy + data for the Axona v2 homepage prototype (redesign/axona-v2).
-// Ported from the "Axona v2" design project (Homepage.dc.html renderVals), with two reconciliations
-// the handoff PRD requires: (1) positioning — "operating system", never "ERP", as the primary
-// descriptor; thesis spine kept (procurement + per-unit build genealogy wedge; humans + machines +
-// agents; primitives → domains → verticals; the moat). (2) it's a directional LOOK prototype.
-//
-// PROTOTYPE TRACTION: the counter, logo wall, agent stats, "40hrs", testimonials, and named
-// portraits are FICTIONAL sample data (no real company or real person) — approved for this look
-// evaluation. Every fabricated item is logged in docs/pre-launch-swap.md, flagged "replace or get
-// permission before launch."
+// content/site-v2.ts — copy + data for the Axona PRE-LAUNCH homepage.
+// Source of truth: the "Pre-launch Homepage.dc.html" design (Axona v2 components, light-canonical),
+// implemented per specs/PRELAUNCH.1.md. HONESTY RULES (non-negotiable, from CLAUDE.md + the handoff):
+// no customer logos / usage metrics / testimonials / named-quoted people / "$·hrs·× saved" anywhere.
+// Sample data lives ONLY inside a product mock and is visibly labeled "sample data — illustrative".
+// Team = only Nicolas Baranowski, "Founder at Axona". Manufacturing + per-unit build genealogy lead;
+// procurement is an expansion, not the headline.
 
 export const brand = { name: "Axona", lower: "axona", upper: "AXONA" } as const;
 export const year = 2026;
+export const contactEmail = "hello@axonahq.com";
 
 export const announce = {
-  text: "Introducing Agents by Axona — the AI operating system for robotics ops.",
-  cta: "Learn more",
+  text: "Pre-launch — we're onboarding our first founding design partners.",
+  cta: "Apply",
+  href: "#partner",
 };
 
-export interface NavItem {
+export interface NavLink {
   label: string;
-  caret?: boolean;
+  href: string;
 }
 export const nav = {
-  items: [
-    { label: "Platform", caret: true },
-    { label: "Modules", caret: true },
-    { label: "Solutions", caret: true },
-    { label: "Customers" },
-    { label: "Pricing" },
-  ] as NavItem[],
-  signIn: "Sign in",
-  cta: "See a demo",
+  links: [
+    { label: "Platform", href: "#platform" },
+    { label: "How it works", href: "#wedge" },
+    { label: "Design partners", href: "#partner" },
+  ] as NavLink[],
+  soon: "Docs",
+  contact: "Contact",
+  cta: "Request access",
 };
 
-export const hero = {
-  eyebrow: "PARTS UNDER MANAGEMENT BY AXONA:",
-  counter: "7,491,284 parts", // FICTIONAL illustrative counter (static) — see pre-launch-swap.md
-  h1: "Build robots. Not spreadsheets.",
-  sub: "Procurement, manufacturing, quality, fulfillment, field service, finance — humans, machines, and agents on one AI-native operating system for robotics.",
-  emailPlaceholder: "What's your work email?",
-  cta: "Book a demo",
-};
-
-export interface AgentStat {
+// Hero. One product visual: the SN-2208 build-genealogy widget, explicitly labeled sample.
+export interface GenealogyRow {
   label: string;
+  state: "ok" | "progress";
   value: string;
 }
-export const agentStats = {
-  label: "AGENTS AT WORK TODAY",
-  stats: [
-    { label: "BOMS SYNCED", value: "175.5K" },
-    { label: "AGENT ACTIONS", value: "514" },
-    { label: "POS DRAFTED", value: "13,422" },
-    { label: "SHORTAGES CAUGHT", value: "2,288" },
-    { label: "UNITS TRACED", value: "3,280" },
-  ] as AgentStat[],
-};
-
-export const join = {
-  headlineLead: "Join 1,200 of the world's most ambitious hardware teams",
-  headlineTail: "shipping 3.2× faster than the industry average.",
-  link: "Read the report",
-  // FICTIONAL placeholder logos (no real company) — see pre-launch-swap.md
-  logos: [
-    "NORTHWIND",
-    "EIGHT",
-    "FORGE",
-    "MERIDIAN",
-    "ATLAS",
-    "VANTA",
-    "AXIOM",
-    "HELIX",
-    "ORBIT",
-    "NOVA",
-    "PILOT",
-  ],
-  photoStat: {
-    value: "40hrs",
-    caption: "Saved every month, per ops lead",
-    tag: "[ CUSTOMER PHOTO ]",
+export const hero = {
+  statusChip: "Onboarding our first founding design partners",
+  h1: "Build robots. Not spreadsheets.",
+  sub: "The operating system for robotics makers — manufacturing and per-unit build genealogy first, then your whole operation. Humans, machines, and agents on one system.",
+  cta: "Request access",
+  secondaryCta: "See how it works",
+  sampleLabel: "Sample data — illustrative",
+  widget: {
+    unit: "UNIT · SN-2208",
+    status: "IN BUILD",
+    genealogyLabel: "Build genealogy",
+    pct: "84%",
+    rows: [
+      { label: "Chassis · weld & torque", state: "ok", value: "PASS" },
+      { label: "PCB · rev C · serial trace", state: "ok", value: "PASS" },
+      {
+        label: "Actuator pack · in progress",
+        state: "progress",
+        value: "14 / 18",
+      },
+    ] as GenealogyRow[],
+    footer: "142 PARTS TRACED · 3 SUPPLIERS · BOM REV 12",
+    workOrderCap: "WORK ORDER · WO-2208",
+    workOrderStatus: "ROUTED FOR APPROVAL",
+    agentCap: "AGENT · DRAFT",
   },
 };
 
-// Module map (the platform launcher). `agents` counts are FICTIONAL sample data — see pre-launch-swap.md.
-export interface Module {
-  name: string;
-  desc: string;
-  agents?: string;
+export interface NumberedItem {
+  idx: string;
+  title: string;
+  body: string;
 }
-export interface ModuleGroup {
-  label: string;
-  modules: Module[];
-}
-export const platform = {
-  h2: "One operating system. Every function on the floor.",
-  sub: "Every module ships with agents. Workflows orchestrates them across modules. Command Center is the single pane over all of it.",
-  groups: [
+export const problem = {
+  eyebrow: "The problem",
+  h2: "The line changes weekly. The records don't keep up.",
+  items: [
     {
-      label: "CORE",
-      modules: [
-        { name: "Command Center", desc: "Live overview across every module" },
-        { name: "Agents", desc: "Every module's agents in one place" },
-        { name: "Workflows", desc: "Orchestrate agents across modules" },
-        { name: "Projects", desc: "Workspaces, files & matrices" },
-        { name: "Machines", desc: "Plant & equipment register" },
-      ],
+      idx: "01",
+      title: "BOMs in constant flux",
+      body: "A revision lands, a part goes long-lead, an engineer swaps a connector. The bill of materials moves faster than the spreadsheet tracking it.",
     },
     {
-      label: "VALUE CHAIN",
-      modules: [
-        {
-          name: "Procurement",
-          desc: "Sourcing, RFQs & POs",
-          agents: "6 agents",
-        },
-        { name: "Manufacturing", desc: "Work orders & build genealogy" },
-        { name: "Inventory", desc: "Parts, spares & RMA" },
-        { name: "Quality", desc: "Inspection, calibration & certs" },
-        {
-          name: "Fulfillment",
-          desc: "Install & commissioning",
-          agents: "3 active",
-        },
-        { name: "Sales & CRM", desc: "CPQ & deliverability" },
-        { name: "Marketing", desc: "Demand & pipeline" },
-      ],
+      idx: "02",
+      title: "No reliable per-unit record",
+      body: "When a robot ships, which rev of which part actually went into it? The answer lives in someone's memory, a photo, and three different tabs.",
     },
     {
-      label: "ROBOTICS",
-      modules: [
-        {
-          name: "Fleet",
-          desc: "Deployed units & telemetry",
-          agents: "4 agents",
-        },
-        { name: "Field Service", desc: "Dispatch & predictive maintenance" },
-        { name: "Engineering", desc: "CAD, firmware & change orders" },
-        { name: "Autonomy", desc: "Missions, safety & SLAs" },
-      ],
+      idx: "03",
+      title: "Tools that never spoke",
+      body: "PLM, MES, procurement, and the shop floor each hold a piece of the truth. Nothing reconciles them, so people do — by hand.",
     },
-    {
-      label: "BACK OFFICE",
-      modules: [
-        {
-          name: "Finance",
-          desc: "GL, AP/AR & RaaS revenue",
-          agents: "6 agents",
-        },
-        { name: "People", desc: "Workforce & technician certs" },
-        { name: "Security", desc: "Access & device posture" },
-        { name: "Legal", desc: "Contracts & export control" },
-      ],
-    },
-  ] as ModuleGroup[],
+  ] as NumberedItem[],
 };
 
-export const systems = {
-  h2: "Systems that never spoke.",
-  sub: "Spreadsheets, your PLM, the shop floor, accounting — finally on one connected graph.",
-  legacy: ["[ SPREADSHEETS ]", "[ PLM / CAD ]", "[ ACCOUNTING ]"],
+export interface FlowStep {
+  idx: string;
+  label: string;
+  active?: boolean;
+}
+export const wedge = {
+  eyebrow: "What it is",
+  h2: "An agentic manufacturing co-pilot, with a record of every build.",
+  body: "Agents draft work orders, chase long-lead parts, and keep per-unit build genealogy current. You stay in the loop on every step: propose → approve → audit. A human approves before anything happens.",
+  bodyEmphasis:
+    "An operating system, not another point tool — one spine, your whole operation.",
+  steps: [
+    { idx: "01", label: "Propose" },
+    { idx: "02", label: "Approve · human", active: true },
+    { idx: "03", label: "Audit" },
+  ] as FlowStep[],
+  // Sample product screen — visibly labeled.
+  screen: {
+    cap: "PO-10482 · DRAFT",
+    sample: "SAMPLE DATA",
+    agentLine: "Agent drafted a purchase order",
+    desc: "Harmonic drive · long-lead · flagged short against WO-2208. Sourced from approved supplier, RFQ compared.",
+    rows: [
+      { k: "Part", v: "HD-17-CSF" },
+      { k: "Quantity", v: "24" },
+      { k: "ETA", v: "4 days" },
+    ],
+    approve: "Approve",
+    edit: "Edit",
+    note: "Routed to you · awaiting sign-off",
+  },
 };
 
 export interface Layer {
@@ -166,245 +130,132 @@ export interface Layer {
   title: string;
   body: string;
 }
-export const architecture = {
-  eyebrow: "THE ARCHITECTURE",
-  h2: "One system that adapts to how your factory runs.",
+export const platform = {
+  eyebrow: "The platform",
+  h2: "Four layers on one spine.",
   intro:
-    "Four layers stacked on one spine. Forward-deployed work recycles into reusable primitives — a platform, never one-off code.",
+    "Start with manufacturing and build genealogy. The same spine carries the rest of your operation when you're ready.",
   layers: [
     {
       tag: "L4 · VERTICAL EDITIONS",
-      title: "Vertical Editions",
-      body: "A version of Axona pre-configured for your industry — the workflows, terminology, and screens a humanoid, defense, or space team actually needs on day one.",
+      title: "Vertical editions",
+      body: "Axona pre-configured for an industry — the workflows, terminology, and screens a given robotics team needs on day one. Humanoids first.",
     },
     {
       tag: "L3 · DOMAIN APPS",
-      title: "Domain Apps",
-      body: "Composable workflows built from shared primitives — procurement, manufacturing, quality, logistics, field service.",
+      title: "Domain apps",
+      body: "Composable workflows from shared primitives — manufacturing and build genealogy lead; procurement, quality, logistics, and field service follow.",
     },
     {
-      tag: "L2 · INTELLIGENCE & AGENT SPINE",
-      title: "Intelligence & Agent Spine",
-      body: "Specialized models, long-term memory, and per-unit build genealogy — orchestrating humans, machines, and agents.",
+      tag: "L2 · INTELLIGENCE & AGENTS",
+      title: "Intelligence & agent spine",
+      body: "Specialized models and long-term memory that learn how your factory runs — orchestrating humans, machines, and agents, with a human approving every step.",
     },
     {
       tag: "L1 · DATA & CONTEXT",
-      title: "Data & Context",
-      body: "Connectors to ERP, PLM, MES, telemetry, and docs — plus an ontology of how your company actually works. VPC / on-prem / edge.",
+      title: "Data & context",
+      body: "Connectors to ERP, PLM, MES, telemetry, and docs — plus an ontology of how your company actually works. VPC, on-prem, or edge.",
     },
   ] as Layer[],
-  primitivesLabel: "THE PRIMITIVES — THE ELEMENTS EVERY WORKFLOW IS BUILT FROM",
-  primitives: [
-    "SOPs",
-    "Documents",
-    "Data",
-    "Agents",
-    "Humans",
-    "Machines",
-    "Inventory",
-    "Meetings",
-    "Integrations",
-    "Interfaces",
-  ],
 };
 
 export interface Vertical {
-  name: string;
   idx: string;
-  tag?: string;
+  name: string;
+  tag: "First" | "SOON";
 }
 export const verticals = {
-  eyebrow: "THE VERTICALS",
-  h2: "One engine, proven on humanoids — then carried to every kind of robot company.",
+  eyebrow: "The verticals",
+  h2: "Proving it on humanoids first — then carrying the engine to every kind of robot company.",
   items: [
-    { name: "Humanoids", idx: "01", tag: "Coming soon" },
-    { name: "Defense", idx: "02", tag: "Coming soon" },
-    { name: "Logistics", idx: "03", tag: "Coming soon" },
-    { name: "Manufacturing", idx: "04" },
-    { name: "Construction", idx: "05" },
-    { name: "Healthcare", idx: "06" },
-    { name: "Space", idx: "07" },
-    { name: "Automotive", idx: "08" },
+    { idx: "01", name: "Humanoids", tag: "First" },
+    { idx: "02", name: "Defense", tag: "SOON" },
+    { idx: "03", name: "Logistics", tag: "SOON" },
+    { idx: "04", name: "Manufacturing", tag: "SOON" },
   ] as Vertical[],
 };
 
-export const introAgents = {
-  h2: "Introducing Agents by Axona. The AI operating system for hardware ops.",
-  quote:
-    "“We turned off three legacy tools in our first month. Axona caught a servo shortage before it ever reached the line.”",
-  attribution: "— VP Operations, mobility robotics", // FICTIONAL testimonial — see pre-launch-swap.md
-  link: "Read the story",
-  lockupTag: "[ BRAND LOCKUP / LOGO ]",
-};
-
-export const keepFocused = {
-  // FICTIONAL portrait — see pre-launch-swap.md
-  portrait: {
-    name: "Lauren",
-    role: "Head of Ops, drone manufacturer",
-    tag: "[ CUSTOMER PORTRAIT ]",
+export const partner = {
+  eyebrow: "Founding design partners",
+  h2: "We're building this with a handful of robotics makers.",
+  body: "No customer wall, because we're pre-launch and honest about it. We're taking on a small group of founding design partners to build Axona on their real operation.",
+  founder: {
+    initials: "NB",
+    name: "Founder-led — Nicolas Baranowski",
+    bio: "Founder at Axona.",
   },
-  h2: "Keep your ops team focused on shipping. Let agents handle the busywork.",
-  body: "Agents watch stock, draft purchase orders, reconcile receipts, and surface exceptions — around the clock. Your team approves and moves on.",
-  link: "See how it works",
+  benefits: [
+    {
+      idx: "01",
+      title: "Forward-deployed build",
+      body: "We build on your data and your floor, not a generic demo.",
+    },
+    {
+      idx: "02",
+      title: "One workflow, fast",
+      body: "Pick one painful workflow; we take it to production quickly.",
+    },
+    {
+      idx: "03",
+      title: "Founding-partner terms",
+      body: "Early pricing and commitment that reflect building together.",
+    },
+    {
+      idx: "04",
+      title: "A line to the roadmap",
+      body: "Direct input on what we build, in what order.",
+    },
+  ] as NumberedItem[],
 };
 
-export interface PolicyRow {
-  k: string;
-  v: string;
-}
-export const aiLearns = {
-  eyebrow: "A LOOK AT ONE MODULE · PROCUREMENT",
-  h2: "AI that learns from your operation. Powered by 1,200 teams that came before you.",
-  subline: "The same propose → approve → audit pattern runs in every module.",
-  body: "Axona flags the part that always slips, the vendor that always runs late, and the cost leak hiding in your BOM — before they cost you a build.",
-  policyTitle: "Procurement Policy",
-  policyBadge: "Auto-applied",
-  policyRows: [
-    { k: "Reorder point breach", v: "AUTO-PO" },
-    { k: "Vendor lead-time risk", v: "FLAGGED" },
-    { k: "Cost variance > 8%", v: "ESCALATE" },
-  ] as PolicyRow[],
-};
-
-export interface ScaleCard {
-  title: string;
-  body: string;
-  cap: string;
-}
-export const scale = {
-  h2Lead: "Scale the line.",
-  h2Tail: "Shrink the paperwork.",
-  cards: [
-    {
-      title: "Role-based access & approvals",
-      body: "Give buyers, line leads, and finance exactly the access they need — nothing more.",
-      cap: "ACCESS · ROLES",
-    },
-    {
-      title: "One platform for every site",
-      body: "Multi-site stock, transfers, and global spend in a single view.",
-      cap: "SITES · GLOBAL",
-    },
-  ] as ScaleCard[],
-};
-
-export interface Receipt {
-  logo: string;
-  quote: string;
-  who: string;
-}
-export const receipts = {
-  h2: "We've got the receipts.",
-  // FICTIONAL testimonials + logos (no real company / person) — see pre-launch-swap.md
-  items: [
-    {
-      logo: "NORTHWIND",
-      quote:
-        "Cycle counts went from days to minutes. The line hasn't stopped for a missing part since.",
-      who: "Director of Ops",
-    },
-    {
-      logo: "FORGE",
-      quote:
-        "Agents draft our POs before a shortage ever hits the floor. It pays for itself.",
-      who: "VP Manufacturing",
-    },
-    {
-      logo: "MERIDIAN",
-      quote:
-        "One graph for every screw and every deployed unit. Books finally close on time.",
-      who: "Founder",
-    },
-    {
-      logo: "ATLAS",
-      quote:
-        "We replaced four tools and a pile of spreadsheets in our first month.",
-      who: "Head of Supply Chain",
-    },
-    {
-      logo: "HELIX",
-      quote: "Per-unit margin visibility changed how we price every contract.",
-      who: "CFO",
-    },
-    {
-      logo: "ORBIT",
-      quote: "Onboarded across two sites in under 30 days. No rip-and-replace.",
-      who: "COO",
-    },
-    {
-      logo: "NOVA",
-      quote:
-        "The firmware and warranty traceability alone was worth the switch.",
-      who: "Head of Service",
-    },
-    {
-      logo: "PILOT",
-      quote:
-        "Our ops team finally builds robots instead of reconciling sheets.",
-      who: "Eng Lead",
-    },
-  ] as Receipt[],
-};
-
-export const closing = {
+export const finalCta = {
   h2: "Hit every build date.",
-  emailPlaceholder: "What's your work email?",
-  cta: "Book a demo",
-};
-
-// Request-access form copy (V2.1) — verbatim from content.md (request-access form section).
-export const form = {
-  labels: {
-    name: "Name",
-    email: "Work email",
-    company: "Company",
-    role: "Your role",
-    building: "What are you building?",
-  },
-  emailPlaceholder: "What's your work email?",
-  submit: "Request access",
-  consent: "I agree to be contacted about Axona.",
-  privacyLabel: "privacy policy",
-  privacyHref: "#privacy",
-  heroNote: "By submitting, you agree to be contacted about Axona.",
-  // Honest success copy — must match SUCCESS_MESSAGE in app/actions/request-access.ts.
-  success:
-    "Thanks — we'll be in touch within a few days. Founders read every request.",
-  errorGeneric: "We couldn't submit that just now. Please try again.",
+  sub: "Tell us what you're building. We'll show you Axona on your own operation.",
 };
 
 export interface FooterCol {
   head: string;
-  links: string[];
+  links: { label: string; href?: string; soon?: boolean }[];
 }
 export const footer = {
-  tagline: "The AI-native operating system for companies building robots.",
+  tagline: "The operating system for robotics makers.",
   cols: [
     {
       head: "PRODUCT",
       links: [
-        "Platform",
-        "Modules",
-        "AI agents",
-        "Integrations",
-        "Security",
-        "Pricing",
+        { label: "Platform", href: "#platform" },
+        { label: "How it works", href: "#wedge" },
+        { label: "Docs", soon: true },
+        { label: "Pricing", soon: true },
       ],
     },
     {
-      head: "SOLUTIONS",
-      links: ["Drones", "Mobility", "Warehouse", "Industrial", "Contract mfg"],
-    },
-    {
       head: "COMPANY",
-      links: ["About", "Customers", "Careers", "Blog", "Contact"],
-    },
-    {
-      head: "RESOURCES",
-      links: ["Docs", "Guides", "ROI calculator", "Status", "FAQs"],
+      links: [
+        { label: "Design partners", href: "#partner" },
+        { label: "Contact", href: `mailto:${contactEmail}` },
+        { label: "Careers", soon: true },
+        { label: "Blog", soon: true },
+      ],
     },
   ] as FooterCol[],
-  legal: "Placeholder wordmark — swap with your logo",
-  cta: "See a demo",
+  getAccess: {
+    head: "GET ACCESS",
+    text: "Onboarding founding design partners now.",
+    cta: "Request access",
+  },
+  legal:
+    "© 2026 Axona, Inc. · Pre-launch · Placeholder wordmark — swap with your logo",
+};
+
+// Request-access form copy (wired to the requestAccess server action).
+export const form = {
+  emailPlaceholder: "What's your work email?",
+  submit: "Request access",
+  emailLabel: "Work email",
+  note: "We'll only use this to reach out about a founding design-partner fit.",
+  // Honest success copy — must match SUCCESS_MESSAGE in app/actions/request-access.ts.
+  success:
+    "Thanks — request received. We'll be in touch within a few days. Founders read every request.",
+  errorGeneric: "We couldn't submit that just now. Please try again.",
 };
