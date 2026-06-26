@@ -1,10 +1,4 @@
-import {
-  platform,
-  systems,
-  type Module,
-  type ExpandStep,
-} from "@/content/site-v2";
-import { cn } from "@/lib/utils";
+import { platform, systems, type Module } from "@/content/site-v2";
 
 // The asymmetric square mark used on each module card.
 function ModuleMark() {
@@ -41,22 +35,6 @@ function ModuleCard({ m }: { m: Module }) {
   );
 }
 
-function ExpandPill({ s }: { s: ExpandStep }) {
-  return (
-    <span
-      className={cn(
-        "inline-flex items-center gap-[9px] rounded-full border px-[14px] py-[9px] text-[13px] font-medium",
-        s.active
-          ? "border-ink bg-ink text-white"
-          : "border-line2 bg-white text-[--body]",
-      )}
-    >
-      <span className="font-mono text-[10px] opacity-70">{s.idx}</span>
-      {s.label}
-    </span>
-  );
-}
-
 export function Platform() {
   return (
     <section
@@ -87,33 +65,6 @@ export function Platform() {
             </div>
           </div>
         ))}
-      </div>
-
-      {/* Land & expand band */}
-      <div className="mt-9 flex flex-wrap items-center gap-7 rounded-[14px] border border-line px-7 py-[30px]">
-        <div className="min-w-[280px] flex-1">
-          <span className="font-mono text-[11px] tracking-[0.08em] text-faint">
-            {platform.expand.eyebrow}
-          </span>
-          <h3 className="mt-3 max-w-[24ch] text-[clamp(20px,2.2vw,28px)] font-semibold leading-[1.1] tracking-[-0.025em] text-ink">
-            {platform.expand.h3}
-          </h3>
-          <p className="mt-2.5 max-w-[46ch] text-[14px] leading-[1.5] text-[--body]">
-            {platform.expand.body}
-          </p>
-        </div>
-        <div className="flex flex-wrap items-center gap-2.5">
-          {platform.expand.steps.map((s) => (
-            <span key={s.idx} className="flex items-center gap-2.5">
-              <ExpandPill s={s} />
-              {s.arrow && (
-                <span className="text-logo" aria-hidden="true">
-                  →
-                </span>
-              )}
-            </span>
-          ))}
-        </div>
       </div>
     </section>
   );
