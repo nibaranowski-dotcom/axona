@@ -92,12 +92,6 @@ export interface ModuleGroup {
   label: string;
   modules: Module[];
 }
-export interface ExpandStep {
-  idx: string;
-  label: string;
-  active?: boolean;
-  arrow?: boolean;
-}
 export const platform = {
   h2: "One operating system. Every function on the floor.",
   sub: "Every module ships with agents. Workflows orchestrates them across modules. Command Center is the single pane over all of it.",
@@ -159,17 +153,6 @@ export const platform = {
       ],
     },
   ] as ModuleGroup[],
-  expand: {
-    eyebrow: "LAND & EXPAND",
-    h3: "Start where it's on fire. Run the whole floor on the same spine.",
-    body: "Land with procurement and per-unit build genealogy. The same system then runs quality, fulfillment, field service, and finance — adding a module is configuration, not a rebuild.",
-    steps: [
-      { idx: "01", label: "Procurement", active: true, arrow: true },
-      { idx: "02", label: "Quality", arrow: true },
-      { idx: "03", label: "Fulfillment", arrow: true },
-      { idx: "04", label: "Finance" },
-    ] as ExpandStep[],
-  },
 };
 
 export const systems = {
