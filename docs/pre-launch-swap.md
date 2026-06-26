@@ -9,13 +9,14 @@ Source of all copy/data: `content/site-v2.ts`.
 
 ## Fabricated metrics / counters → REPLACE or REFRAME
 
-| Item                      | Where             | Value (fictional)                                                      | Action before launch                                                                                    |
-| ------------------------- | ----------------- | ---------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| Parts counter             | Hero eyebrow      | `7,491,284 parts`                                                      | Replace with a real figure, or reframe ("built for the robotics era" / design-partner program), or cut. |
-| Agents-at-work strip      | Hero              | BOMs 175.5K · actions 514 · POs 13,422 · shortages 2,288 · units 3,280 | Replace with real telemetry or cut the strip.                                                           |
-| "Join 1,200… 3.2× faster" | Join headline     | `1,200` teams, `3.2×`                                                  | Reframe honestly (e.g. "built with ambitious hardware teams") — no fabricated counts/multiples.         |
-| "40hrs saved / month"     | Join photo cell   | `40hrs`                                                                | Replace with a measured figure from a design partner, or cut.                                           |
-| "Powered by 1,200 teams"  | AI-that-learns H2 | `1,200`                                                                | Drop the number unless real.                                                                            |
+| Item                      | Where               | Value (fictional)                                                                            | Action before launch                                                                                    |
+| ------------------------- | ------------------- | -------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| Parts counter             | Hero eyebrow        | `7,491,284 parts`                                                                            | Replace with a real figure, or reframe ("built for the robotics era" / design-partner program), or cut. |
+| Agents-at-work strip      | Hero                | BOMs 175.5K · actions 514 · POs 13,422 · shortages 2,288 · units 3,280                       | Replace with real telemetry or cut the strip.                                                           |
+| "Join 1,200… 3.2× faster" | Join headline       | `1,200` teams, `3.2×`                                                                        | Reframe honestly (e.g. "built with ambitious hardware teams") — no fabricated counts/multiples.         |
+| "40hrs saved / month"     | Join photo cell     | `40hrs`                                                                                      | Replace with a measured figure from a design partner, or cut.                                           |
+| "Powered by 1,200 teams"  | AI-that-learns H2   | `1,200`                                                                                      | Drop the number unless real.                                                                            |
+| Module agent counts       | Platform module map | `6 agents` (Procurement), `3 active` (Fulfillment), `4 agents` (Fleet), `6 agents` (Finance) | Replace with real counts or drop the badges — implies live agents we don't run yet.                     |
 
 ## Fabricated logos → PERMISSION or REPLACE (highest legal risk)
 
